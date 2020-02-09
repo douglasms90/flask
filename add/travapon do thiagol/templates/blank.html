@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>TAPI - TravaPON</title>
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='skeleton.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
+
+  <script type="text/javascript" src="{{ url_for('static', filename='jquery-2.2.4.min.js') }}"></script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+
+
+    $('form').submit(function (e) {
+      var url = "{{ url_for('ajaxPage') }}"; // send the form data here.
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: $('form').serialize(), // serializes the form's elements.
+        dataType:'json',        
+        success: function (data) {
+                      // console.log(data.dados);
+                      switch(data.dados[0][5]){
+                        case 'S':
+                          var situacao = "Cancelado";
+                          break;
+                        case 'N':
+                          var situacao = "Ativo";
+                          break;    
+                      };                        
+                    
+                      if(data.conexao=='Connected'){
+                        var img = '<img src="static/yes.png" width="23px" height="23px" id="conectado">';
+
+                      }else if(data.conexao=='Disconnected'){
+                        var img = '<img src="static/delete.png" width="20px" height="20px" id="n-conectado">';
+                      }  
+
+                      var conteudo ='<div class="div-nome"><p><strong>Cliente:</strong> <span id="lbl-dcliente">'+data.dados[0][0]+'</span></p> </div> <div class="div-cb"><p><strong>Bairro: </strong> <span id="lbl-bairro">'+data.dados[0][2]+'</span> <strong id="lbl-cidade">Cidade: </strong> <span>'+data.dados[0][1]+'</span></p> </div> <div class="dv-rn"> <p><strong>Logradouro: </strong> <span id="lbl-logradouro">'+data.dados[0][3]+'</span> <strong id="lbl-numero-lograd">Nº: </strong> <span id="lblnumero">'+data.dados[0][4]+'</span></p></div> <div class="div-can"> <p><strong>Situação: </strong><span id="lbl-situacao">'+situacao+'</span></p> </div> <div class="div-con"> <p><strong>Status da Conexão: </strong> <span id="lbl-statusconexao">'+img+'</span><a id="lbl-refresh" href="#" alt="Atualize a conexão"><img src="static/refresh.png" width="30px" height="30px" id="refresh"> </a></span></p></div><div class="button-log"><button id="log">Gerar Histórico de Conexão</button></div>';
+                      
+                       console.log(data);
+                       $('div.panel-body').html(conteudo);
+                       
+                      var contrato = data.dados[0][6];
+                      
+                $(document).on("click", '#lbl-refresh', function() { 
+                   var url2 = "{{ url_for('ajaxConexao') }}";
+                   img = '<img src="static/loader.gif" width="20px" height="20px" id="loading">';
+                   $('#lbl-statusconexao').html(img);
+                  $.ajax({
+                     type: "POST",
+                      url: url2,
+                      data: {'contrato':contrato}, 
+                      dataType:'json',        
+                      success: function (data) {
+                       if(data.status=='Connected'){
+                        var img = '<img src="static/yes.png" width="23px" height="23px" id="conectado">';
+                        $('#lbl-statusconexao').html(img);
+                       }else if(data.status=='Disconnected'){
+                        var img = '<img src="static/delete.png" width="20px" height="20px" id="n-conectado">';
+                        $('#lbl-statusconexao').html(img);
+                      }
+                    }
+                  });
+                });
+                                          
+              }              
+            });
+            e.preventDefault(); // block the traditional submission of the form.
+
+            $(document).on("click",'#log',function(){
+              alert('console');
+            });
+        });
+        
+        // Atualizar com o codigo de refresh conexão!
+        
+        
+      }); 
+  </script>
+
+  <style type="text/css">
+
+    .input-group-addon {
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1;
+      color: #555;
+      text-align: center;
+      background-color: #eee;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .input-group {
+    position: relative;
+    /*border:1px solid blue;*/
+    top:50px;
+   }
+
+   .row {
+    position: relative;
+    /*border:1px solid black;*/
+   }
+
+   .panel-heading {
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+    background-color: #D1D0D0;
+    height: 30px;
+    /*border:10px solid green;*/
+    margin-top: 60px;
+    min-width: 700px;
+    width: auto;
+   }
+
+   .panel-heading span {
+     position: relative;
+     /*border:1px solid black;*/
+   }
+
+   .panel-body {
+    min-width: 700px;
+    width: auto;
+    position: relative;
+    border:1px solid #D1D0D0;
+    /*margin-top: 10px;*/
+    padding: 10px;
+    }
+
+   .panel-body div {
+    /*border:1px solid red;*/
+    position: relative;
+
+   }
+
+   .panel-body div p {
+    position: relative;
+    /*border:1px solid green;*/
+   }
+
+   #lbl-numero-lograd {
+    /*border:1px solid;*/
+    margin-left: 20px
+   }
+
+   #lbl-cidade {
+    /*border:1px solid;*/
+    margin-left: 20px
+   }
+
+   #lbl-refresh {
+    margin-left: 20px
+   }
+
+
+</style>
+     
+  
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+       <!-- Formulario -->
+        
+          <div class="input-group">
+          <form method="POST" name='form'>
+        	 <input type="text" name="contratotxt" class="form-control" placeholder="Informe o contrato" size="20">
+           <button type="submit">Buscar</button>            
+          </form>   
+          </div>
+
+<div class="panel-heading"> <span>Dados do Contrato</span></div>
+
+<div class="panel-body">  
+<!-- Dados Contrato  via Ajax -->
+</div>   
+
+<div class="log-connection"></div>
+<!-- Obter LOG Conexão assinante -->
+  </div>
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

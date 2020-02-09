@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Alerta PAC PON</title>
+</head>
+<body>
+	<table>
+		
+<tbody>          
+         {% for i in data %}
+         <tr>
+          <td> {% print i["CLIENTE"] %} </td>
+          <td> {% print i["CIDADE"] %} </td>
+          <td> {% print i["BAIRRO"] %} </td>      
+          <td> {% print i["LOGRADOURO"] %} </td>
+          <td> {% print i["NUMERO"] %} </td>
+          <td> {% print i["CONTRATO"] %} </td>
+          <td> {% print i["USERNAME"] %} </td>
+          <td> {% print i["DEFEITO"] %} </td>
+          <td> {% print i["HORARIO"] %} </td>
+          
+         </tr>
+         {% endfor %}
+</tbody>         
+	</table>
+</body>
+</html>
