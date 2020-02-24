@@ -20,4 +20,4 @@ class databaseConnection:
       return "Impossible to connect to the database, check your code."
   
   def close(self):
-     self._db.close()
+    self._db.close()
