@@ -1,1 +1,21 @@
-{% extends "_layout.html" %}{% block title %}{% endblock %}{% block head %}{% endblock %}{% block navbar %}<li><a href="{{url_for('home')}}">Home</a></li><li><a href="{{url_for('suporte')}}">Suporte</a></li>{% endblock %}{% block content %}<div class="container side-collapse-container"> <div class="row"> <h1>Hello</h1> <p>This is a side opening nav demonstration</p><p>Make your browser smaller and the top menu wil become into a lateral slider menu</p></div></div>{% endblock %}
+{% extends "_layout.html" %}
+
+{% block title %}{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block navbar %}
+  <li><a href="{{ url_for('home')}}">Home</a></li>
+  <li><a href="{{ url_for('suporte')}}">Suporte</a></li>
+{% endblock %}
+
+{% block content %}
+  <div class="container side-collapse-container">
+    <div class="row">
+      <h1>Hello</h1>
+      <p>This is a side opening nav demonstration</p>
+      <p>Make your browser smaller and the top menu wil become into a lateral slider menu</p>
+    </div>
+  </div>
+{% endblock %}

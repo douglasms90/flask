@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, redirect, url_for
 from app import app
 from datetime import date, timedelta
 from os import makedirs, path
@@ -30,7 +30,7 @@ def suporte():
     WHERE status='1' AND tipo_os in ('4','15') ORDER BY cd.cidade asc""")
   obj_list = data.dumpData(database, tomorrow)
   if request.method == "POST":
-    path_xlsx = '/home/douglas/Python/intranet/app/static/suporte/model.xlsx'
+    path_xlsx = '/home/douglas/Python/newproject/app/static/suporte/model.xlsx'
     path_folder = f'/home/douglas/Documentos/worksheet/{dt_month}'
     path_file = f'{path_folder}/{dt_file}.xlsx'
     if path.isdir(path_folder):
@@ -43,7 +43,6 @@ def suporte():
     connect.close()
     webbrowser.open(path.abspath(path_file))
   return render_template("suporte.html", rows = obj_list)
-
 
 """
 SELECT os.codos, df.descricao_defeito, at.dt_abertura, os.data_abertura,cd.cidade, ba.bairro, lo.logradouro, cl.nome_razaosocial, os.defeito_reclamado

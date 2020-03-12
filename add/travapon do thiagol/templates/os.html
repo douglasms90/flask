@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+   {% extends "layout.html" %}
+  <body>
+  {% block body %}  
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+    <style type="text/css">
+      table.paleBlueRows {
+      font-family: Tahoma, Geneva, sans-serif;
+      border: 1px solid #FFFFFF;
+      width: 1340px;
+      height: 200px;
+      text-align: center;
+      border-collapse: collapse;
+      overflow-x:auto;
+    }
+    table.paleBlueRows td, table.paleBlueRows th {
+      border: 1px solid #FFFFFF;
+      padding: 3px 2px;
+    }
+    table.paleBlueRows tbody td {
+      font-size: 13px;
+    }
+    table.paleBlueRows tr:nth-child(even) {
+      background: #D0E4F5;
+    }
+    table.paleBlueRows thead {
+      background: #0B6FA4;
+      border-bottom: 5px solid #FFFFFF;
+    }
+    table.paleBlueRows thead th {
+      font-size: 17px;
+      font-weight: bold;
+      color: #FFFFFF;
+      text-align: center;
+      border-left: 2px solid #FFFFFF;
+    }
+    table.paleBlueRows thead th:first-child {
+      border-left: none;
+    }
+
+    table.paleBlueRows tfoot {
+      font-size: 14px;
+      font-weight: bold;
+      color: #333333;
+      background: #D0E4F5;
+      border-top: 3px solid #444444;
+    }
+    table.paleBlueRows tfoot td {
+      font-size: 14px;
+    }    
+
+    .data{
+      font-size:13px;
+      font-family: Arial;
+      padding: 1em;
+    }
+    
+    #link{      
+      position: absolute;
+      right: 25px;
+      padding: 10px;
+    }
+
+    </style>
+  <div class="data">
+    <form action="{{ url_for('os') }}" method="post">
+     
+        Data: <input type="text" id="datepicker" name="datepicker"> 
+                
+        <input type="submit" name="buscar" value="Buscar"> 
+        
+          <a href="{{ url_for('index') }}" class="badge badge-primary" id=link>Início</a>          
+        
+   </form>
+  </div>  
+     <!-- Main Content -->
+    <div class="conteudo">
+      <table class="paleBlueRows">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>DEFEITO</th>
+            <th>CLIENTE</th>
+            <th>BAIRRO</th>
+            <th>RUA</th>
+            <th>NUMERO</th>
+            <th>CONTRATO</th>
+            <th>USERNAME</th>
+            <th>DEFEITO</th>
+
+          </tr>
+        </thead>
+        <tbody>          
+         {% for i in data %}
+         <tr>
+          <td> {% print i["ID"] %} </td>
+          <td> {% print i["CLIENTE"] %} </td>
+          <td> {% print i["CIDADE"] %} </td>
+          <td> {% print i["BAIRRO"] %} </td>      
+          <td> {% print i["LOGRADOURO"] %} </td>
+          <td> {% print i["NUMERO"] %} </td>
+          <td> {% print i["CONTRATO"] %} </td>
+          <td> {% print i["USERNAME"] %} </td>
+          <td> {% print i["DEFEITO"] %} </td>
+
+         </tr>
+         {% endfor %}
+         </tbody>
+       </table>
+      </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <p class="copyright text-muted">Copyright &copy; Thiago Moraes - 2018</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{{ url_for('static', filename='clean-blog.min.js') }}"></script>
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      <link rel="stylesheet" href="/resources/demos/style.css">
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script>
+        $(function() {
+    $("#datepicker").datepicker({dateFormat: 'yy-mm-dd',changeMonth: true, changeYear:  true, showOtherMonths: true, selectOtherMonths: true,
+        dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+        dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+        dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+        monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+        monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+
+});
+});
+
+  </script>
+  {% endblock %}
+  </body>
+
+</html>

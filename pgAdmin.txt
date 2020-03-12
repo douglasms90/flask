@@ -1,0 +1,1 @@
+python venv/lib/python3.6/site-packages/pgadmin4/pgAdmin4.py

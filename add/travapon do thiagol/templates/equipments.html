@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex">
+  <title>TravaPON System </title>
+  <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+  <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+  <style type='text/css'>
+    .row-index {
+      width: 50px;
+      display: inline-block;
+    }    
+    .bar-above{
+      position: relative; 
+      line-height: 34px;,
+
+    }
+
+    .fixed-table-container{
+      height: auto !important;
+    }
+
+   
+  
+
+  </style>
+
+  <script type='text/javascript'>
+    $(window).load(function(){
+      var data = {{data|tojson}};
+      var columns = {{columns|tojson}};
+
+      $(function() {
+        $('#table').bootstrapTable({ 
+          data: data,
+          columns: columns,
+        });
+
+      });
+
+    });
+  </script>
+</head>
+<body>
+  <div class="container" style="padding: 10px; ">
+    <h1>{{title}}</h1> 
+    <div style="position: relative; float:right; bottom: 10px;" id="voltar">  
+      <a class="btn btn-primary" href="{{url_for('index')}}" role="button">Voltar </a>      
+    </div>
+    <div id="toolbar">
+    </div>
+    <table
+      id="table"
+      data-toggle="true"
+      data-toolbar="#toolbar"
+      data-search="true"
+      data-show-columns="true"
+      data-pagination="true"
+      data-height="500">
+    </table>
+  </div>
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+</body>
+</html>

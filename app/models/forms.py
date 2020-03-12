@@ -1,5 +1,12 @@
 from flask_wtf import FlaskForm
+from wtforms import Form, StringField, PasswordField
+from wtforms.validators import DataRequired
+from re import match
 
+
+class LoginForm(FlaskForm):
+  username = StringField("username", validators=[DataRequired()])
+  password = PasswordField("password", validators=[DataRequired()])
 
 class dumpData():
   def dumpData(self, database, tomorrow):
