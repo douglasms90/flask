@@ -19,7 +19,7 @@ def suporte():
   
   connect = databaseConnection("dbname='mkData3.0' user='cliente_r' host='177.184.72.6' password='Cl13nt_R'")
   data = dumpData()
-  database = connect.Consult("""SELECT os.codos, cl.cd_empresa, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro, lo.logradouro, df.descricao_defeito
+  database = connect.Consult("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro, lo.logradouro
     FROM mk_os os
     FULL OUTER JOIN mk_os_tipo tp ON os.tipo_os = tp.codostipo
     JOIN mk_pessoas cl ON os.cliente = cl.codpessoa
@@ -30,7 +30,7 @@ def suporte():
     WHERE status='1' AND tipo_os in ('4','15') ORDER BY cd.cidade asc""")
   obj_list = data.dumpData(database, tomorrow)
   if request.method == "POST":
-    path_xlsx = '/home/douglas/Python/newproject/app/static/suporte/model.xlsx'
+    path_xlsx = '/home/douglas/Python/intranet/app/static/suporte/model.xlsx'
     path_folder = f'/home/douglas/Documentos/worksheet/{dt_month}'
     path_file = f'{path_folder}/{dt_file}.xlsx'
     if path.isdir(path_folder):
