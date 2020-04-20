@@ -13,9 +13,9 @@ data = date.today() + timedelta(days=1)
 
 dt_month = data.strftime('%m.%Y')
 dt_file = data.strftime('%d.%m.%Y')
-dt = data.strftime('%d/%m/%Y')
+tomorrow = data.strftime('%d/%m/%Y')
 
-path_xlsx = '/home/douglas/Python/intranet/add/model.xlsx'
+path_xlsx = '/home/douglas/Python/intranet/app/static/suporte/model.xlsx'
 path_folder = f'/home/douglas/Documentos/worksheet/{dt_month}'
 path_file = f'{path_folder}/{dt_file}.xlsx'
 
@@ -25,8 +25,7 @@ else:
   makedirs(path_folder)
 
 class databaseConnection:
-  
-  _db = None
+  _db = None    
   def __init__(self, conn):
     self._db = psycopg2.connect(conn)
 
@@ -39,9 +38,9 @@ class databaseConnection:
       return database
     except:
       return "Impossible to connect to the database, check your code."
-
+  
   def close(self):
-    self._db.close()
+     self._db.close()
 
 class workSheet():
 
@@ -49,36 +48,38 @@ class workSheet():
     self.workbook = load_workbook(path_xlsx)
     self.worksheet = self.workbook.active
 
-  def dumpData(self, database):
+  def dumpData(self, database, tomorrow):
     obj_list = list()
+    count = 0
     for data in database:
       ob = dict()
+      count += 1
+      ob["column1"] = count # Quantos
       ob["column2"] = data[0] # Id
-      if data[1] == 3: # Tomador
-        ob["column3"] = "MULTIPLA"
-      else:
-        ob["column3"] = "SPEED"
-      ob["column4"] = data[2]
+      ob["column3"] = data[1] # Defeito
+      ob["column4"] = data[2] # Tipo
       if data[3]:
-        ob["column5"] = data[3].strftime("%d/%m/%Y") # Gerada em
+        ob["column5"] = data[3].strftime("%d/%m/%Y") # Gerada
       else:
         ob["column5"] = "X"
       ob["column6"] = data[4] # Cliente
-      ob["column7"] = '' # Cobrança
-      ob["column8"] = dt # Distribuida em
+      ob["column7"] = ''
+      ob["column8"] = tomorrow # Distribuida
       ob["column9"] = data[5] # Cidade
-      ob["column10"] = data[6] # Bairro
+      ob["column10"] = data[6].title() # Bairro
+      ob["column12"] = data[7].title() # Logradouro
       obj_list.append(ob)
     return obj_list
 
   def add_ob(self, ob, row):
+    self.worksheet.cell(column=1, row=row).value = ob["column1"] # Quantidade
     self.worksheet.cell(column=2, row=row).value = ob["column2"] # Id
-    self.worksheet.cell(column=3, row=row).value = ob["column3"] # Tomador
+    self.worksheet.cell(column=3, row=row).value = ob["column3"] # Defeito
     self.worksheet.cell(column=4, row=row).value = ob["column4"] # Tipo
-    self.worksheet.cell(column=5, row=row).value = ob["column5"] # Gerada em
+    self.worksheet.cell(column=5, row=row).value = ob["column5"] # Gerada
     self.worksheet.cell(column=6, row=row).value = ob["column6"] # Cliente
-    self.worksheet.cell(column=7, row=row).value = ob["column7"] # Cobrança
-    self.worksheet.cell(column=8, row=row).value = ob["column8"] # Distribuida em
+    self.worksheet.cell(column=7, row=row).value = ob["column7"] # Cobrança Vinculada / Defeito
+    self.worksheet.cell(column=8, row=row).value = ob["column8"] # Distribuida
     self.worksheet.cell(column=9, row=row).value = ob["column9"] # Cidade
     self.worksheet.cell(column=10, row=row).value = ob["column10"] # Bairro
 
@@ -93,15 +94,17 @@ class workSheet():
 connect = databaseConnection("dbname='mkData3.0' user='cliente_r' host='177.184.72.6' password='Cl13nt_R'")
 createWorksheet = workSheet(path_xlsx)
 
-database = connect.Consult("""SELECT os.codos, cl.cd_empresa,tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro
-FROM mk_os os
-FULL OUTER JOIN mk_os_tipo tp ON os.tipo_os = tp.codostipo
-JOIN mk_pessoas cl ON os.cliente = cl.codpessoa
-JOIN mk_cidades cd ON os.cd_cidade = cd.codcidade
-JOIN mk_bairros ba ON os.cd_bairro = ba.codbairro
-WHERE status='1' AND tipo_os in ('4','15') ORDER BY cd.cidade asc""")
+database = connect.Consult("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro, lo.logradouro
+  FROM mk_os os
+  FULL OUTER JOIN mk_os_tipo tp ON os.tipo_os = tp.codostipo
+  JOIN mk_pessoas cl ON os.cliente = cl.codpessoa
+  JOIN mk_os_defeitos df ON os.defeito_associado = df.coddefeito
+  JOIN mk_cidades cd ON os.cd_cidade = cd.codcidade
+  JOIN mk_bairros ba ON os.cd_bairro = ba.codbairro
+  JOIN mk_logradouros lo ON os.cd_logradouro = lo.codlogradouro
+  WHERE status='1' AND tipo_os in ('4','15') ORDER BY cd.cidade asc""")
 
-obj_list = createWorksheet.dumpData(database)
+obj_list = createWorksheet.dumpData(database, tomorrow)
 createWorksheet.add_into_sheet(obj_list)
 createWorksheet.save(path_file)
 
