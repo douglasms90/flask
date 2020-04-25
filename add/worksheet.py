@@ -9,21 +9,6 @@ from re import match
 import webbrowser
 
 
-data = date.today() + timedelta(days=1)
-
-dt_month = data.strftime('%m.%Y')
-dt_file = data.strftime('%d.%m.%Y')
-tomorrow = data.strftime('%d/%m/%Y')
-
-path_xlsx = '/home/douglas/Python/intranet/app/static/suporte/model.xlsx'
-path_folder = f'/home/douglas/Documentos/worksheet/{dt_month}'
-path_file = f'{path_folder}/{dt_file}.xlsx'
-
-if path.isdir(path_folder):
-  pass
-else:
-  makedirs(path_folder)
-
 class databaseConnection:
   _db = None    
   def __init__(self, conn):
@@ -90,6 +75,21 @@ class workSheet():
   def save(self, path_file):
     self.workbook.save(path_file)
 
+
+data = date.today() + timedelta(days=1)
+
+dt_month = data.strftime('%m.%Y')
+dt_file = data.strftime('%d.%m.%Y')
+tomorrow = data.strftime('%d/%m/%Y')
+
+path_xlsx = '/home/douglas/Python/intranet/app/static/suporte/model.xlsx'
+path_folder = f'/home/douglas/Documentos/worksheet/{dt_month}'
+path_file = f'{path_folder}/{dt_file}.xlsx'
+
+if path.isdir(path_folder):
+  pass
+else:
+  makedirs(path_folder)
 
 connect = databaseConnection("dbname='mkData3.0' user='cliente_r' host='177.184.72.6' password='Cl13nt_R'")
 createWorksheet = workSheet(path_xlsx)
