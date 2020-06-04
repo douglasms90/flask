@@ -17,14 +17,17 @@ class dumpData():
       count += 1
       ob["column1"] = count # Quantos
       ob["column2"] = data[0] # Id
-      ob["column3"] = data[1] # Defeito
+      if data[1]:
+        ob["column3"] = data[1] # Defeito
+      else:
+        ob["column3"] = "X" # Defeito
       ob["column4"] = data[2] # Tipo
       if data[3]:
         ob["column5"] = data[3].strftime("%d/%m/%Y") # Gerada
       else:
         ob["column5"] = "X"
       ob["column6"] = data[4] # Cliente
-      ob["column7"] = ''
+      ob["column7"] = ""
       ob["column8"] = tomorrow # Distribuida
       ob["column9"] = data[5] # Cidade
       ob["column10"] = data[6].title() # Bairro
