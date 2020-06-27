@@ -31,6 +31,7 @@ class dumpData():
       ob["column8"] = tomorrow # Distribuida
       ob["column9"] = data[5] # Cidade
       ob["column10"] = data[6].title() # Bairro
-      ob["column12"] = data[7].title() # Logradouro
+      ob["column11"] = data[7].title() # Logradouro
+      ob["column12"] = data[8].title() # Logradouro
       obj_list.append(ob)
     return obj_list

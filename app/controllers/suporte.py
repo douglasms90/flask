@@ -15,10 +15,10 @@ def suporte():
   data = date.today() + timedelta(days=1)
 
   tomorrow = data.strftime('%d/%m/%Y')
-  
+
   connect = databaseConnection("dbname='mkData3.0' user='cliente_r' host='177.184.72.6' password='Cl13nt_R'")
   data = dumpData()
-  database = connect.Consult("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro, lo.logradouro
+  database = connect.Consult("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro, lo.logradouro, os.operador
     FROM mk_os os
     FULL OUTER JOIN mk_os_tipo tp ON os.tipo_os = tp.codostipo
     JOIN mk_pessoas cl ON os.cliente = cl.codpessoa
