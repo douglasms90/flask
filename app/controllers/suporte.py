@@ -26,7 +26,7 @@ def suporte():
     JOIN mk_cidades cd ON os.cd_cidade = cd.codcidade
     JOIN mk_bairros ba ON os.cd_bairro = ba.codbairro
     JOIN mk_logradouros lo ON os.cd_logradouro = lo.codlogradouro
-    WHERE status='1' AND tipo_os in ('4','15') ORDER BY cd.cidade asc""")
+    WHERE status='1' AND tipo_os in ('4','15') AND fechamento_tecnico='N' ORDER BY cd.cidade asc""")
   obj_list = data.dumpData(database, tomorrow)
   if request.method == "POST":
     
@@ -34,7 +34,7 @@ def suporte():
   
     dt_file = data.strftime('%d.%m.%Y')
     
-    path_xlsx = '/home/douglas/Python/intranet/app/static/suporte/model.xlsx' 
+    path_xlsx = '/home/douglas/Python/intranet/app/static/suporte/model.xlsx'
     path_folder = f'/home/douglas/Documentos/worksheet/{dt_month}'
     path_file = f'{path_folder}/{dt_file}.xlsx'
     
