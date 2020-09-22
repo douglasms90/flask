@@ -4,6 +4,7 @@
 div#table_os_wrapper.dataTables_wrapper.no-footer{
   width:99%;
   margin:0 auto;
+  margin-top: 5px;
 }
 table.dataTable{
   width:100%;

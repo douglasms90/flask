@@ -1,35 +1,55 @@
 {% extends "_layout.html" %}
 
-{% block title %} / Suporte / os{% endblock %}
-
 {% block head %}
   <!-- table -->
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  <link rel="stylesheet" href="{{ url_for('static', filename='suporte/table.css') }}">
-  <script type=text/javascript src="{{ url_for('static', filename='suporte/table.js') }}"></script>
-  <!-- button -->
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="{{ url_for('static', filename='suporte/button.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+  <script type=text/javascript src="{{ url_for('static', filename='js/table.js') }}"></script>
 {% endblock %}
 
-{% block navbar %}
-  <li><a href="{{ url_for('home')}}">Home</a></li>
-  <li><a href="{{ url_for('suporte')}}">Suporte</a></li>
-{% endblock %}
+{% block body %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Overmind</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-{% block content %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('home')}}">Home</a>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('suporte')}}">Suporte <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
   <table id="table_os" class="display">
     <thead>
       <tr>
-        <th>ID</th><th>DEFEITO</th><th>TIPO</th><th>GERADA</th><th>CLIENTE</th><th>DISTRIBUIDA</th><th>CIDADE</th><th>BAIRRO</th><th>LOGRADOURO</th><th>OPERADOR</th>
+        <th>ID</th><th>DEFEITO</th><th>TIPO</th><th>GERADA</th><th>CLIENTE</th><th>DISTRIBUIDA</th><th>CIDADE</th><th>BAIRRO</th><th>LOGRADOURO</th><th>NUM</th><th>OPERADOR</th>
       </tr>
     </thead>
     <tbody>
       {% for row in rows %}
         <tr>
-          <td>{{ row.column2 }}</td><td>{{ row.column3 }}</td><td>{{ row.column4 }}</td><td>{{ row.column5 }}</td><td>{{ row.column6 }}</td><td>{{ row.column8 }}</td><td>{{ row.column9 }}</td><td>{{ row.column10 }}</td><td>{{ row.column11 }}</td><td>{{ row.column12 }}</td>
+          <td>{{ row.column2 }}</td><td>{{ row.column3 }}</td><td>{{ row.column4 }}</td><td>{{ row.column5 }}</td><td>{{ row.column6 }}</td><td>{{ row.column8 }}</td><td>{{ row.column9 }}</td><td>{{ row.column10 }}</td><td>{{ row.column11 }}</td><td>{{ row.column12 }}</td><td>{{ row.column13 }}</td>
         </tr>
       {% endfor %}
     </tbody>
@@ -37,6 +57,6 @@
   </div>
   
   <form method='POST'>
-    <button class="btn btn-default btn-round-lg btn-lg">Planilha</button>
+    <button class="btn btn-dark">Planilha</button>
   </form>
 {% endblock %}
