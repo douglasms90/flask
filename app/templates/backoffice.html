@@ -22,7 +22,7 @@
           <a class="nav-link" href="{{ url_for('suporte')}}">Suporte</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="{{ url_for('bo')}}">BackOffice <span class="sr-only">(current)</span></a>
+          <a class="nav-link active" href="{{ url_for('backoffice')}}">BackOffice <span class="sr-only">(current)</span></a>
         <li class="nav-item">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,8 +48,6 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>DEFEITO</th>
-        <th>TIPO</th>
         <th>GERADA</th>
         <th>CLIENTE</th>
         <th>CIDADE</th>
@@ -67,11 +65,9 @@
           <td>{{ row.column4 }}</td>
           <td>{{ row.column5 }}</td>
           <td>{{ row.column6 }}</td>
+          <td>{{ row.column7 }}</td>
+          <td>{{ row.column8 }}</td>
           <td>{{ row.column9 }}</td>
-          <td>{{ row.column10 }}</td>
-          <td>{{ row.column11 }}</td>
-          <td>{{ row.column12 }}</td>
-          <td>{{ row.column13 }}</td>
         </tr>
       {% endfor %}
     </tbody>

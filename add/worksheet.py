@@ -11,14 +11,22 @@ import webbrowser
 
 class databaseConnection:
   _db = None    
-  def __init__(self, conn):
-    self._db = psycopg2.connect(conn)
+  def __init__(self):
+    self._db = psycopg2.connect("dbname='mkData3.0' user='cliente_r' host='177.184.72.6' password='Cl13nt_R'")
 
-  def Consult(self, select):
-    database = None 
+  def consult(self):
+    database = None
     try:
       cur = self._db.cursor()
-      cur.execute(select)
+      cur.execute("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro, lo.logradouro
+				FROM mk_os os
+				FULL OUTER JOIN mk_os_tipo tp ON os.tipo_os = tp.codostipo
+				JOIN mk_pessoas cl ON os.cliente = cl.codpessoa
+				JOIN mk_os_defeitos df ON os.defeito_associado = df.coddefeito
+				JOIN mk_cidades cd ON os.cd_cidade = cd.codcidade
+				JOIN mk_bairros ba ON os.cd_bairro = ba.codbairro
+				JOIN mk_logradouros lo ON os.cd_logradouro = lo.codlogradouro
+				WHERE status='1' AND tipo_os in ('4','15','18') AND fechamento_tecnico='N' ORDER BY cd.cidade asc""")
       database = cur.fetchall()
       return database
     except:
@@ -48,8 +56,8 @@ class workSheet():
       else:
         ob["column5"] = "X"
       ob["column6"] = data[4] # Cliente
-      ob["column7"] = ''
-      ob["column8"] = tomorrow # Distribuida
+      ob["column7"] = None # Distribuida
+      ob["column8"] = tomorrow.strftime('%d/%m/%Y')
       ob["column9"] = data[5] # Cidade
       ob["column10"] = data[6].title() # Bairro
       ob["column12"] = data[7].title() # Logradouro
@@ -76,37 +84,32 @@ class workSheet():
     self.workbook.save(path_file)
 
 
-data = date.today() + timedelta(days=1)
+tomorrow = date.today() + timedelta(days=1)
 
-dt_month = data.strftime('%m.%Y')
-dt_file = data.strftime('%d.%m.%Y')
-tomorrow = data.strftime('%d/%m/%Y')
+dt_month = tomorrow.strftime('%m.%Y')
+dt_file = tomorrow.strftime('%d.%m.%Y')
 
-path_xlsx = '/home/douglas/dev/py/intranet/app/static/xlsx/model.xlsx' # Arquivo .xlsx
-path_folder = f'/home/douglas/Documentos/worksheet/{dt_month}'         # Onde vai salvar
-path_file = f'{path_folder}/{dt_file}.xlsx'
+path_xlsx = '/home/douglas/dev/py/intranet/app/static/xlsx/model.xlsx' 	# Arquivo .xlsx
+path_folder = f'/home/douglas/Documentos/worksheet/{dt_month}'         	# Onde vai sala
+path_file = f'{path_folder}/{dt_file}.xlsx'															# Caminho onde vai salvar com data.
 
 if path.isdir(path_folder):
   pass
 else:
   makedirs(path_folder)
 
-connect = databaseConnection("dbname='mkData3.0' user='cliente_r' host='177.184.72.6' password='Cl13nt_R'")
+connect = databaseConnection()
+
+database = connect.consult()
+
+connect.close()
+
 createWorksheet = workSheet(path_xlsx)
 
-database = connect.Consult("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro, lo.logradouro
-  FROM mk_os os
-  FULL OUTER JOIN mk_os_tipo tp ON os.tipo_os = tp.codostipo
-  JOIN mk_pessoas cl ON os.cliente = cl.codpessoa
-  JOIN mk_os_defeitos df ON os.defeito_associado = df.coddefeito
-  JOIN mk_cidades cd ON os.cd_cidade = cd.codcidade
-  JOIN mk_bairros ba ON os.cd_bairro = ba.codbairro
-  JOIN mk_logradouros lo ON os.cd_logradouro = lo.codlogradouro
-  WHERE status='1' AND tipo_os in ('4','15','18') AND fechamento_tecnico='N' ORDER BY cd.cidade asc""")
-
 obj_list = createWorksheet.dumpData(database, tomorrow)
+
 createWorksheet.add_into_sheet(obj_list)
+
 createWorksheet.save(path_file)
 
 webbrowser.open(path.abspath(path_file))
-connect.close()

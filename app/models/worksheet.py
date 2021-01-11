@@ -1,16 +1,16 @@
-from openpyxl import load_workbook
+from openpyxl import Workbook, load_workbook
 
 
-class createWorksheet():
-  def __init__(self, path_xlsx):
-    self.workbook = load_workbook(path_xlsx)
+class worksheet():
+  def __init__(self):
+    self.workbook = Workbook()
     self.worksheet = self.workbook.active
 
   def add_ob(self, ob, row):
     self.worksheet.cell(column=1, row=row).value = ob["column1"]
-    self.worksheet.cell(column=2, row=row).value = ob["column2"]
+    self.worksheet.cell(column=2, row=row).value = ob["column2"] 
     self.worksheet.cell(column=3, row=row).value = ob["column3"]
-    self.worksheet.cell(column=4, row=row).value = ob["column4"]
+    self.worksheet.cell(column=4, row=row).value = ob["column4"] 
     self.worksheet.cell(column=5, row=row).value = ob["column5"]
     self.worksheet.cell(column=6, row=row).value = ob["column6"]
     self.worksheet.cell(column=7, row=row).value = ob["column7"]

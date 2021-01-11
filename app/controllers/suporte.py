@@ -6,13 +6,13 @@ import webbrowser
 
 from app import app
 from app.models.tables import databaseConnection
-from app.models.worksheet import createWorksheet
+from app.models.worksheet import worksheet
 
 
 @app.route("/suporte", methods = ["GET", "POST"])
 def suporte():
   connect = databaseConnection("dbname='mkData3.0' user='cliente_r' host='177.184.72.6' password='Cl13nt_R'")
-  database = connect.Consult("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro, lo.logradouro, os.num_endereco, os.operador
+  database = connect.consult("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro, lo.logradouro, os.num_endereco, os.operador
     FROM mk_os os
     FULL OUTER JOIN mk_os_tipo tp ON os.tipo_os = tp.codostipo
     JOIN mk_pessoas cl ON os.cliente = cl.codpessoa
@@ -51,6 +51,7 @@ def suporte():
       ob["column13"] = data[9].title() # Logradouro
       obj_list.append(ob)
     return obj_list
+    
   obj_list = dumpData(database)
   if request.method == "POST":
 
@@ -58,7 +59,6 @@ def suporte():
   
     dt_file = tomorrow.strftime('%d.%m.%Y')
     
-    path_xlsx = '/home/douglas/dev/py/intranet/app/static/xlsx/model.xlsx'
     path_folder = f'/home/douglas/Documentos/worksheet/{dt_month}'
     path_file = f'{path_folder}/{dt_file}.xlsx'
     
@@ -67,7 +67,7 @@ def suporte():
     else:
       makedirs(path_folder)
     
-    create = createWorksheet(path_xlsx)
+    create = worksheet()
     create.add_into_sheet(obj_list)
     create.save(path_file)
 
@@ -75,3 +75,9 @@ def suporte():
     
     webbrowser.open(path.abspath(path_file))
   return render_template("suporte.html", rows = obj_list)
+
+@app.route('/conexao', methods = ["POST"])
+def buscarconexao():
+  username = request.get_json()
+  return userAccess(username)
+

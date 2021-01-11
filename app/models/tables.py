@@ -39,7 +39,7 @@ class databaseConnection:
   def __init__(self, conn):
     self._db = psycopg2.connect(conn)
 
-  def Consult(self, select):
+  def consult(self, select):
     database = None 
     try:
       cur = self._db.cursor()
