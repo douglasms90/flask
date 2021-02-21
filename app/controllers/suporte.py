@@ -21,7 +21,8 @@ def suporte():
     JOIN mk_bairros ba ON os.cd_bairro = ba.codbairro
     JOIN mk_logradouros lo ON os.cd_logradouro = lo.codlogradouro
     WHERE status='1' AND tipo_os in ('4','15','18') AND fechamento_tecnico='N' ORDER BY cd.cidade asc""")
-
+  connect.close()
+  
   tomorrow = date.today() + timedelta(days=1)
 
   def dumpData(database):
@@ -71,13 +72,5 @@ def suporte():
     create.add_into_sheet(obj_list)
     create.save(path_file)
 
-    connect.close()
-    
-    webbrowser.open(path.abspath(path_file))
   return render_template("suporte.html", rows = obj_list)
-
-@app.route('/conexao', methods = ["POST"])
-def buscarconexao():
-  username = request.get_json()
-  return userAccess(username)
 
