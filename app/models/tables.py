@@ -40,12 +40,12 @@ class databaseConnection:
     self._db = psycopg2.connect(conn)
 
   def consult(self, select):
-    database = None 
+    db = None 
     try:
       cur = self._db.cursor()
       cur.execute(select)
-      database = cur.fetchall()
-      return database
+      db = cur.fetchall()
+      return db
     except:
       return "Impossible to connect to the database, check your code."
   
