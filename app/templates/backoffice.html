@@ -12,7 +12,7 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('home')}}">Home</a>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('suporte')}}">Suporte</a>
+          <a class="nav-link" href="{{ url_for('support')}}">Suporte</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="{{ url_for('backoffice')}}">BackOffice <span class="sr-only">(current)</span></a>
@@ -37,17 +37,19 @@
 {% endblock %}
 
 {% block body %}
-  <table id="table_os" class="display" style="width:100%">
+  <table id="table_os" class="display">
     <thead>
       <tr>
-        <th>Id</th>
-        <th>Gerada</th>
-        <th>Cliente</th>
-        <th>Cidade</th>
-        <th>Bairro</th>
-        <th>Logradouro</th>
-        <th>Num</th>
-        <th>Operador</th>
+        <th>ID</th>
+        <th>DEFEITO</th>
+        <th>TIPO</th>
+        <th>GERADA</th>
+        <th>CLIENTE</th>
+        <th>CIDADE</th>
+        <th>BAIRRO</th>
+        <th>LOGRADOURO</th>
+        <th>NUM</th>
+        <th>OPERADOR</th>
       </tr>
     </thead>
     <tbody>
@@ -58,22 +60,26 @@
           <td>{{ row.column4 }}</td>
           <td>{{ row.column5 }}</td>
           <td>{{ row.column6 }}</td>
-          <td>{{ row.column7 }}</td>
-          <td>{{ row.column8 }}</td>
           <td>{{ row.column9 }}</td>
+          <td>{{ row.column10 }}</td>
+          <td>{{ row.column11 }}</td>
+          <td>{{ row.column12 }}</td>
+          <td>{{ row.column13 }}</td>
         </tr>
       {% endfor %}
     </tbody>
     <tfoot>
       <tr>
-        <th>Id</th>
-        <th>Gerada</th>
-        <th>Cliente</th>
-        <th>Cidade</th>
-        <th>Bairro</th>
-        <th>Logradouro</th>
-        <th>Num</th>
-        <th>Operador</th>
+        <th>ID</th>
+        <th>DEFEITO</th>
+        <th>TIPO</th>
+        <th>GERADA</th>
+        <th>CLIENTE</th>
+        <th>CIDADE</th>
+        <th>BAIRRO</th>
+        <th>LOGRADOURO</th>
+        <th>NUM</th>
+        <th>OPERADOR</th>
       </tr>
     </tfoot>
   </table>

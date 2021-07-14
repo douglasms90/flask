@@ -35,14 +35,14 @@ class User(db.Model):
     return "<User %r>" % self.username
 
 class databaseConnection:
-  _db = None    
+  db = None    
   def __init__(self, conn):
-    self._db = psycopg2.connect(conn)
+    self.db = psycopg2.connect(conn)
 
   def consult(self, select):
     db = None 
     try:
-      cur = self._db.cursor()
+      cur = self.db.cursor()
       cur.execute(select)
       db = cur.fetchall()
       return db
@@ -50,4 +50,4 @@ class databaseConnection:
       return "Impossible to connect to the database, check your code."
   
   def close(self):
-    self._db.close()
+    self.db.close()

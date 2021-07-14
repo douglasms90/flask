@@ -12,7 +12,7 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('home')}}">Home</a>
         <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('suporte')}}">Suporte <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{{ url_for('support')}}">Suporte <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('backoffice')}}">BackOffice</a>
@@ -55,16 +55,7 @@
     <tbody>
       {% for row in rows %}
         <tr>
-          <td>{{ row.column2 }}</td>
-          <td>{{ row.column3 }}</td>
-          <td>{{ row.column4 }}</td>
-          <td>{{ row.column5 }}</td>
-          <td>{{ row.column6 }}</td>
-          <td>{{ row.column9 }}</td>
-          <td>{{ row.column10 }}</td>
-          <td>{{ row.column11 }}</td>
-          <td>{{ row.column12 }}</td>
-          <td>{{ row.column13 }}</td>
+          <td>{{ row.ID }}</td>
         </tr>
       {% endfor %}
     </tbody>

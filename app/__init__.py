@@ -14,5 +14,5 @@ lm = LoginManager()
 
 lm.init_app(app)
 
-from app.models import tables, forms, worksheets
-from app.controllers import default, suporte, backoffice
+from app.models import tables, forms, dumpdata
+from app.controllers import default, support, backoffice
