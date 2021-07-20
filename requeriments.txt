@@ -1,0 +1,6 @@
+flask
+sql_alchemy
+flask_login
+flask_excel
+psycopg2-binary
+flask_wtf

@@ -23,7 +23,6 @@ def support():
 
   tomorrow = date.today() + timedelta(days=1)
   obj_list = dumpdata.support(db, tomorrow)
-  print(obj_list)
   if request.method == "POST":
     return excel.make_response_from_array(obj_list, "xlsx", file_name = tomorrow.strftime('%d.%m.%Y'))
   return render_template("support.html", rows = obj_list)
