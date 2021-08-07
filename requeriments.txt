@@ -1,5 +1,5 @@
-flask
-sql_alchemy
+Flask
+flask_sqlalchemy
 flask_login
 flask_excel
 psycopg2-binary
