@@ -1,10 +1,9 @@
-from flask import render_template, request
+from flask import render_template
 from datetime import date, timedelta
 import flask_excel as excel
 
 from app import app
 from app.models.tables import databaseConnection
-from app.models.dumpdata import dumpdata
 
 
 @app.route("/backoffice", methods = ["GET", "POST"])
@@ -20,9 +19,4 @@ def backoffice():
     JOIN mk_logradouros lo ON os.cd_logradouro = lo.codlogradouro
     WHERE status='1' AND tipo_os in ('4','15','18') AND fechamento_tecnico='N' ORDER BY cd.cidade asc""")
   connect.close()
-
-  tomorrow = date.today() + timedelta(days=1)
-  obj_list = dumpdata.backoffice(db, tomorrow)
-  if request.method == "POST":
-    return excel.make_response_from_array(obj_list, "xlsx", file_name = tomorrow.strftime('%d.%m.%Y'))
-  return render_template("backoffice.html", rows = obj_list)
+  return render_template("backoffice.html", rows = db)

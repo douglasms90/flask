@@ -89,7 +89,7 @@ tomorrow = date.today() + timedelta(days=1)
 dt_month = tomorrow.strftime('%m.%Y')
 dt_file = tomorrow.strftime('%d.%m.%Y')
 
-path_xlsx = '/home/douglas/dev/py/intranet/app/static/xlsx/model.xlsx' 	# Arquivo .xlsx
+path_xlsx = '/home/douglas/dev/py/intranet/add/model.xlsx' 	# Arquivo .xlsx
 path_folder = f'/home/douglas/Documentos/worksheet/{dt_month}'         	# Onde vai sala
 path_file = f'{path_folder}/{dt_file}.xlsx'															# Caminho onde vai salvar com data.
 
