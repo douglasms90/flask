@@ -9,20 +9,18 @@ from app.models.tables import databaseConnection
 @app.route("/support", methods = ["GET", "POST"])
 def support():
   connect = databaseConnection("dbname='mkData3.0' user='cliente_r' host='177.184.72.6' password='Cl13nt_R'")
-  objList = connect.consult("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro, lo.logradouro, os.num_endereco, os.operador
+  database = connect.consult("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro
     FROM mk_os os
     FULL OUTER JOIN mk_os_tipo tp ON os.tipo_os = tp.codostipo
     JOIN mk_pessoas cl ON os.cliente = cl.codpessoa
     JOIN mk_os_defeitos df ON os.defeito_associado = df.coddefeito
     JOIN mk_cidades cd ON os.cd_cidade = cd.codcidade
     JOIN mk_bairros ba ON os.cd_bairro = ba.codbairro
-    JOIN mk_logradouros lo ON os.cd_logradouro = lo.codlogradouro
     WHERE status='1' AND tipo_os in ('4','15','18') AND fechamento_tecnico='N' ORDER BY cd.cidade asc""")
   connect.close()
 
   tomorrow = date.today() + timedelta(days=1)
 
   if request.method == "POST":
-    return excel.make_response_from_array(objList, "xlsx", tomorrow.strftime('%d.%m.%Y'))
-  return render_template("support.html", rows = objList)
-
+    return excel.make_response_from_array(database, "xlsx", file_name = tomorrow.strftime('%d.%m.%Y'))
+  return render_template("support.html", rows = database)

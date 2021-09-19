@@ -2,7 +2,7 @@
 
 {% block navbar %}
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Overmind</a>
+    <a class="navbar-brand" href="#">Tapi</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -47,9 +47,6 @@
         <th>CLIENTE</th>
         <th>CIDADE</th>
         <th>BAIRRO</th>
-        <th>LOGRADOURO</th>
-        <th>NUM</th>
-        <th>OPERADOR</th>
       </tr>
     </thead>
     <tbody>
@@ -62,9 +59,6 @@
           <td>{{ row[4] }}</td>
           <td>{{ row[5] }}</td>
           <td>{{ row[6] }}</td>
-          <td>{{ row[7].title() }}</td>
-          <td>{{ row[8] }}</td>
-          <td>{{ row[9].title() }}</td>
         </tr>
       {% endfor %}
     </tbody>
@@ -77,9 +71,6 @@
         <th>CLIENTE</th>
         <th>CIDADE</th>
         <th>BAIRRO</th>
-        <th>LOGRADOURO</th>
-        <th>NUM</th>
-        <th>OPERADOR</th>
       </tr>
     </tfoot>
   </table>

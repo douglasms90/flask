@@ -1,6 +1,7 @@
 Flask
 flask_sqlalchemy
 flask_login
-flask_excel
-psycopg2-binary
 flask_wtf
+flask_excel
+pyexcel-xlsx
+psycopg2-binary
