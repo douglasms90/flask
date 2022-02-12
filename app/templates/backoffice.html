@@ -45,11 +45,8 @@
         <th>TIPO</th>
         <th>GERADA</th>
         <th>CLIENTE</th>
-        <th>CIDADE</th>
-        <th>BAIRRO</th>
-        <th>LOGRADOURO</th>
-        <th>NUM</th>
-        <th>OPERADOR</th>
+        <th>TÉCNICO</th>
+        <th>DESCRIÇÃO</th>
       </tr>
     </thead>
     <tbody>
@@ -58,13 +55,10 @@
           <td>{{ row[0] }}</td>
           <td>{{ row[1] }}</td>
           <td>{{ row[2] }}</td>
-          <td>{{ row[3].strftime('%d/%m/%Y') }}</td>
+          <td>{{ row[3] }}</td>
           <td>{{ row[4] }}</td>
           <td>{{ row[5] }}</td>
           <td>{{ row[6] }}</td>
-          <td>{{ row[7].title() }}</td>
-          <td>{{ row[8] }}</td>
-          <td>{{ row[9].title() }}</td>
         </tr>
       {% endfor %}
     </tbody>
@@ -77,9 +71,6 @@
         <th>CLIENTE</th>
         <th>CIDADE</th>
         <th>BAIRRO</th>
-        <th>LOGRADOURO</th>
-        <th>NUM</th>
-        <th>OPERADOR</th>
       </tr>
     </tfoot>
   </table>
