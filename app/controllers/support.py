@@ -8,7 +8,7 @@ from app.models.tables import databaseConnection
 
 @app.route("/support", methods = ["GET", "POST"])
 def support():
-  connect = databaseConnection("dbname='mkData3.0' user='cliente_r' host='177.184.72.6' password='Cl13nt_R'")
+  connect = databaseConnection("dbname='' user='' host='' password=''")
   database = connect.consult("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro
     FROM mk_os os
     FULL OUTER JOIN mk_os_tipo tp ON os.tipo_os = tp.codostipo
