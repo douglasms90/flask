@@ -2,7 +2,7 @@ from flask import render_template, request
 from datetime import date, timedelta
 import flask_excel as excel
 
-from intranet.ext import database
+from intranet.ext.database import databaseConnection
 
 
 def init_app(app):
@@ -35,7 +35,7 @@ def init_app(app):
 
   @app.route("/backoffice", methods = ["GET"])
   def backoffice():
-    connect = database()
+    connect = databaseConnection()
     database = connect.consult("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_fechamento, cl.nome_razaosocial, os.operador_fech_tecnico, os.servico_prestado
       FROM mk_os os
       FULL OUTER JOIN mk_os_tipo tp ON os.tipo_os = tp.codostipo
@@ -50,7 +50,7 @@ def init_app(app):
 
   @app.route("/support", methods = ["GET", "POST"])
   def support():
-    connect = database()
+    connect = databaseConnection()
     database = connect.consult("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro
       FROM mk_os os
       FULL OUTER JOIN mk_os_tipo tp ON os.tipo_os = tp.codostipo

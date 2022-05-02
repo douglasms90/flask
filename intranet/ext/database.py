@@ -4,9 +4,9 @@ psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 
 
-def init_app(app)::
+def init_app(app):
   db = None    
-  def __init__(self, conn):
+  def __init__(self):
     self.db = psycopg2.connect("dbname='' user='' host='' password=''")
 
   def consult(self, select):

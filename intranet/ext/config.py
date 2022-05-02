@@ -1,6 +1,6 @@
 from dynaconf import FlaskDynaconf
 
 
-def config(app):
+def init_app(app):
   FlaskDynaconf(app)
   return app

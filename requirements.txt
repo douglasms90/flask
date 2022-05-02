@@ -1,5 +1,6 @@
 flask_excel
 pyexcel-xlsx
 psycopg2-binary
+python-dotenv
 flask_bootstrap
 dynaconf
