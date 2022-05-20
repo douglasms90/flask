@@ -9,5 +9,5 @@ app = Flask(__name__)
 
 config.init_app(app)
 appearance.init_app(app)
-db = database.init_app(app)
-views.init_app(app, db)
+'database.init_app(app)'
+views.init_app(app)
