@@ -2,22 +2,9 @@
 {% block title %}This is an example page{% endblock %}
 
 {% block navbar %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
-        <a class="nav-link" href="#">Features</a>
-        <a class="nav-link" href="#">Pricing</a>
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </div>
-    </div>
-  </div>
-</nav>
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
 {% endblock %}
 
 {% block content %}
@@ -48,6 +35,8 @@
       </tr>
     {% endfor %}
     </tbody>
+    <tfoot>
+      <tr>
         <th scope="col">#</th>
         <th scope="col">ID</th>
         <th scope="col">DEFEITO</th>
@@ -56,9 +45,22 @@
         <th scope="col">CLIENTE</th>
         <th scope="col">CIDADE</th>
         <th scope="col">BAIRRO</th>
+      </tr>
+    </tfoot>
   </table>
 
   <form method='POST'>
     <button class="btn btn-dark">Planilha</button>
   </form>
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/datatable.css') }}">
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/datatable.js') }}"></script>
+{{super()}}
 {% endblock %}
