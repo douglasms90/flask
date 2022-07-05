@@ -21,6 +21,7 @@ def init_app(app):
       JOIN mk_cidades cd ON os.cd_cidade = cd.codcidade
       JOIN mk_bairros ba ON os.cd_bairro = ba.codbairro
       WHERE status='1' AND tipo_os in ('4','15','18') AND fechamento_tecnico='N' ORDER BY cd.cidade asc""")
+    conn.close()
     if request.method == "POST":
       tomorrow = date.today() + timedelta(days=1)
       return excel.make_response_from_array(dbOsNaDumps, "xlsx", file_name = tomorrow.strftime('%d.%m.%Y'))
@@ -35,4 +36,5 @@ def init_app(app):
       JOIN mk_pessoas cl ON os.cliente = cl.codpessoa
       JOIN mk_os_defeitos df ON os.defeito_associado = df.coddefeito
       WHERE  tipo_os in ('4','15','18') AND data_fechamento = CURRENT_DATE AND servico_prestado LIKE '%ugl%' ORDER BY os.data_fechamento desc""")
+    conn.close()
     return render_template("osFi.html", rows = dbOsFiDumps)
