@@ -53,14 +53,3 @@
     <button class="btn btn-dark">Planilha</button>
   </form>
 {% endblock %}
-
-{% block styles %}
-{{super()}}
-<link rel="stylesheet"
-      href="{{ url_for('static', filename='css/datatable.css') }}">
-{% endblock %}
-
-{% block scripts %}
-<script src="{{ url_for('static', filename='js/datatable.js') }}"></script>
-{{super()}}
-{% endblock %}

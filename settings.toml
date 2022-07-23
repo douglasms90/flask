@@ -1,8 +1,8 @@
 [default]
 TITLE = "Intranet"
 EXTENSIONS = [
-    "intranet.ext.appearance",
-    "intranet.blueprints.views"
+    "intranet.ext.appearance:init_app",
+    "intranet.blueprints.webui:init_app"
 ]
 
 [production]
