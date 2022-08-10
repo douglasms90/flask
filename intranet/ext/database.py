@@ -7,7 +7,7 @@ psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 class dbConn():
   conn = None
   def __init__(self):
-    self.conn = psycopg2.connect("dbname='' user='' host='' password=''")
+    self.conn = psycopg2.connect("")
 
   def consult(self, query):
     try:
