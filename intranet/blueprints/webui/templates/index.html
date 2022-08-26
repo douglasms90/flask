@@ -8,5 +8,50 @@
 {% endblock %}
 
 {% block content %}
-  <h1>{{config.get('TITLE')}}</h1>
+  <div class="col-md-4 col-offset-4">
+    <form action="" method="post">
+        <h1>{{config.get('TITLE')}}</h1>
+        <div class="form-group">
+          {{ form.comm(class="form-control", placeholder="Digite um comando") }}
+        </div>
+    </form>
+  </div>
+
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">DEFEITO</th>
+        <th scope="col">TIPO</th>
+        <th scope="col">GERADA</th>
+        <th scope="col">CLIENTE</th>
+        <th scope="col">CIDADE</th>
+        <th scope="col">BAIRRO</th>
+        <th scope="col">DESCRIÇÃO</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for row in rows %}
+      <tr>
+        <td>{{ row.ID }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">DEFEITO</th>
+        <th scope="col">TIPO</th>
+        <th scope="col">GERADA</th>
+        <th scope="col">CLIENTE</th>
+        <th scope="col">CIDADE</th>
+        <th scope="col">BAIRRO</th>
+        <th scope="col">DESCRIÇÃO</th>
+      </tr>
+    </tfoot>
+  </table>
+
+  <form method='POST'>
+    <button class="btn btn-dark">Planilha</button>
+  </form>
 {% endblock %}
