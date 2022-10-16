@@ -31,11 +31,13 @@
       </tr>
     </thead>
     <tbody>
-    {% for row in rows %}
-      <tr>
-        <td>{{ row.ID }}</td>
-      </tr>
-    {% endfor %}
+      {% for row in rows %}
+        <tr>
+          {% for c in row %}
+            <td>{{ c }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
     </tbody>
     <tfoot>
       <tr>

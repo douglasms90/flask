@@ -10,7 +10,7 @@ def index():
   form = commForms()
   conn = dbConn()
   if form.comm.data == 'os':
-    rows = conn.consult("""SELECT json_build_object('ID', os.codos), json_build_object('DEFEITO', df.descricao_defeito), json_build_object('DESCRIÇÃO', tp.descricao), json_build_object('GERADA', os.data_abertura), json_build_object('CLIENTE', cl.nome_razaosocial), json_build_object('CIDADE', cd.cidade), json_build_object('BAIRRO', ba.bairro), json_build_object('DESCRIÇÃO', os.defeito_reclamado)
+    rows = conn.consult("""SELECT os.codos, df.descricao_defeito, tp.descricao, os.data_abertura, cl.nome_razaosocial, cd.cidade, ba.bairro,  os.defeito_reclamado
       FROM mk_os os
       FULL OUTER JOIN mk_os_tipo tp ON os.tipo_os = tp.codostipo
       JOIN mk_pessoas cl ON os.cliente = cl.codpessoa
