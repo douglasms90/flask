@@ -19,16 +19,11 @@
 
   <table class="table table-dark table-striped">
     <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">DEFEITO</th>
-        <th scope="col">TIPO</th>
-        <th scope="col">GERADA</th>
-        <th scope="col">CLIENTE</th>
-        <th scope="col">CIDADE</th>
-        <th scope="col">BAIRRO</th>
-        <th scope="col">DESCRIÇÃO</th>
-      </tr>
+			<tr>
+				{% for t in ts %}
+					<th scope="col">{{ t }}</th>
+				{% endfor %}
+			</tr>
     </thead>
     <tbody>
       {% for row in rows %}
@@ -39,18 +34,6 @@
         </tr>
       {% endfor %}
     </tbody>
-    <tfoot>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">DEFEITO</th>
-        <th scope="col">TIPO</th>
-        <th scope="col">GERADA</th>
-        <th scope="col">CLIENTE</th>
-        <th scope="col">CIDADE</th>
-        <th scope="col">BAIRRO</th>
-        <th scope="col">DESCRIÇÃO</th>
-      </tr>
-    </tfoot>
   </table>
 
   <form method='POST'>
