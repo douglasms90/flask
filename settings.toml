@@ -1,9 +1,15 @@
 [default]
+DEBUG = false
 TITLE = "Intranet"
 SECRET_KEY = "um-nome-bem-seguro"
 EXTENSIONS = [
     "intranet.ext.appearance:init_app",
     "intranet.blueprints.webui:init_app"
 ]
+
+[development]
+DEBUG = true
+
+[testing]
 
 [production]

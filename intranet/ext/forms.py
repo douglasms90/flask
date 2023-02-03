@@ -3,4 +3,4 @@ from wtforms import StringField
 
 
 class commForms(FlaskForm):
-  comm = StringField("comm")
+    comm = StringField("comm")
