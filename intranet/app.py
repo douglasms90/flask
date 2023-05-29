@@ -1,9 +1,13 @@
 from flask import Flask
-from intranet.ext import config
+from intranet.ext import configuration
 
 
-def create_app():
+def minimal_app(**config):
     app = Flask(__name__)
-    config.init_app(app)
-    config.load_extensions(app)
+    configuration.init_app(app, **config)
+    return app
+
+def create_app(**config):
+    app = minimal_app(**config)
+    configuration.load_extensions(app)
     return app

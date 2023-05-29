@@ -1,15 +1,15 @@
 [default]
-DEBUG = false
+
+[development]
+SQLALCHEMY_DATABASE_URI = 'sqlite:///dev.db'
 TITLE = "Intranet"
 SECRET_KEY = "um-nome-bem-seguro"
 EXTENSIONS = [
     "intranet.ext.appearance:init_app",
-    "intranet.blueprints.webui:init_app"
+    "intranet.ext.database:init_app",
+    "intranet.ext.commands:init_app",
+    "intranet.blueprints.webui:init_app",
 ]
 
-[development]
-DEBUG = true
-
-[testing]
-
 [production]
+SQLALCHEMY_DATABASE_URI = 'postgres:///...'

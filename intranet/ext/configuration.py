@@ -4,7 +4,7 @@ from dynaconf import FlaskDynaconf
 
 def load_extensions(app):
     for extension in app.config.EXTENSIONS:
-        # Split data in form `extension.path:factory_function´
+        # Split data in form `extension.path:factory_function`
         module_name, factory = extension.split(":")
         # Dynamically import extension module.
         ext = import_module(module_name)

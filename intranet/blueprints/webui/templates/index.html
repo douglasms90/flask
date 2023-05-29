@@ -1,16 +1,116 @@
 {% extends "bootstrap/base.html" %}
 {% block title %}This is an example page{% endblock %}
 
-{% block navbar %}
-	<div class="navbar navbar-fixed-top">
-		<!-- ... -->
-	</div>
-{% endblock %}
-
 {% block content %}
-	<div class="col-md-4 col-offset-4">
-		<form action="" method="post">
-			<h1>{{config.get('TITLE')}}</h1>
-		</form>
-	</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #36393F;
+            color: #FFF;
+        }
+
+        .chat-container {
+            flex: 1;
+            padding: 20px;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            /* Barra de rolagem suave */
+            z-index: 1; /* Colocar o container do chat em cima */
+        }
+
+        .msg1 {
+            margin-top: 10px;
+            /* Modificação para iniciar a rolagem no final */
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #40444B;
+            border-radius: 5px;
+            text-align: right;
+            /* Mensagens fixadas no lado direito */
+        }
+
+        .msg2 {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #40444B;
+            border-radius: 5px;
+            text-align: left;
+            /* Mensagens fixadas no lado esquerdo */
+        }
+
+        .form-container {
+            position: sticky;
+            /* Mudar para sticky */
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background-color: #2C2F33;
+            display: flex;
+            align-items: center;
+            z-index: 2; /* Colocar o container do formulário em cima */
+        }
+
+        .input-field {
+            flex: 1;
+            margin-right: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #40444B;
+            color: #FFF;
+        }
+
+        .submit-button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #7289DA;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .form {
+            display: flex;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container" id="chat-container">
+        {% for msg in historic %}
+		<div class="msg1">{{msg.req}} | {{ msg.dt }}</div>
+			<div class="msg2">!ativa_onu_vlan {{msg.sn}} {{ "%0.0f" | format(msg.vln)}} {{ "%0.0f" | format(msg.ctr)}} {{msg.cto}}</div>
+        {% endfor %}
+        <!-- Adicionei uma div vazia para dar espaço para a parte de envio de mensagem -->
+        <div style="height: 10"></div>
+    </div>
+    <div class="form-container">
+        <form method="POST" class="form" novalidate>
+            {{ form.csrf_token }}
+            {{ form.msg(class='input-field', placeholder='Digite sua mensagem aqui') }}
+            {{ form.submit(class='submit-button') }}
+        </form>
+    </div>
+
+    <script>
+        // Scroll automático para a parte inferior do chat
+        var chatContainer = document.getElementById('chat-container');
+        chatContainer.scrollBotton = chatContainer.scrollHeight;
+    </script>
+</body>
+</html>
 {% endblock %}
