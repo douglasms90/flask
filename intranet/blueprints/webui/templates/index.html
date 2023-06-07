@@ -92,8 +92,8 @@
 <body>
     <div class="chat-container" id="chat-container">
         {% for msg in historic %}
-		<div class="msg1">{{msg.req}} | {{ msg.dt }}</div>
-			<div class="msg2">!ativa_onu_vlan {{msg.sn}} {{ "%0.0f" | format(msg.vln)}} {{ "%0.0f" | format(msg.ctr)}} {{msg.cto}}</div>
+		<div class="msg1">{{ msg.dt }} | {{msg.req}}</div>
+		<div class="msg2">!ativa_onu_vlan {{msg.sn}} {{ "%0.0f" | format(msg.vln)}} {{ "%0.0f" | format(msg.ctr)}} {{msg.cto}}</div>
         {% endfor %}
         <!-- Adicionei uma div vazia para dar espaço para a parte de envio de mensagem -->
         <div style="height: 10"></div>

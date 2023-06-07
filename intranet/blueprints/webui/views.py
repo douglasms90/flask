@@ -23,6 +23,7 @@ def index():
         db.session.commit()
         return redirect(url_for("webui.index"))
     return render_template("index.html", form=form, historic=Act.query.filter(Act.dt.startswith(datetime.now().date())).all())
+
 def na():
     conn = dbc(config("host"))
     return render_template("os.html", rows = conn.consult(config("naquery")))
