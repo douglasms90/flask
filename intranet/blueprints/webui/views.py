@@ -22,12 +22,13 @@ def index():
         )
         db.session.commit()
         return redirect(url_for("webui.index"))
-    return render_template("index.html", form=form, historic=Act.query.filter(Act.dt.startswith(datetime.now().date())).all())
+    return render_template("index.html", form=form, historic=Act.query.filter(Act.dt.startswith(datetime.now().date())).all(),
+        tittl = ['Id','Data e Hora','Requisição','Commando','SN','Vlan','Contrato','CTO'])
 
 def na():
     conn = dbc(config("host"))
-    return render_template("os.html", rows = conn.consult(config("naquery")))
+    return render_template("table.html", rows = conn.consult(config("naquery")), titl = ['ID', 'NOME', 'CIDADE', 'BAIRRO', 'DESCRIÇÃO'])
 
 def re():
     conn = dbc(config("host"))
-    return render_template("os.html", rows = conn.consult(config("requery")))
+    return render_template("table.html", rows = conn.consult(config("requery")), titl = ['ID', 'NOME', 'CIDADE', 'BAIRRO', 'DESCRIÇÃO'])

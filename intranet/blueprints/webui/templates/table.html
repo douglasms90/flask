@@ -1,21 +1,13 @@
 {% extends "bootstrap/base.html" %}
 {% block title %}This is an example page{% endblock %}
 
-{% block navbar %}
-	<div class="navbar navbar-fixed-top">
-		<!-- ... -->
-	</div>
-{% endblock %}
-
 {% block content %}
 	<table class="table table-dark table-striped">
 		<thead>
 			<tr>
-				<th scope="col">ID</th>
-				<th scope="col">NOME</th>
-				<th scope="col">CIDADE</th>
-				<th scope="col">BAIRRO</th>
-				<th scope="col">DESCRIÇÃO</th>
+			{% for t in titl %}
+				<th scope="col">{{ t }}</th>
+			{% endfor %}
 			</tr>
 		</thead>
 		<tbody>
