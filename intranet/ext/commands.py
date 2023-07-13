@@ -12,16 +12,16 @@ def dropdb():
     db.drop_all()
 
 def insertdb():
-    """Insert database"""
+    """Insert to database"""
     db.session.bulk_save_objects([
         Vln(olt='',tfc='',vln='')
     ])
     db.session.commit()
 
 def updatedb():
-    """Update database"""
+    """Update to database"""
     db.session.bulk_update_mappings(Act, [
-        {'id':'','req':''},
+        {'id':'557'}, # 739 10132
     ])
     db.session.commit()
 
