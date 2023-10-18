@@ -12,7 +12,8 @@ class MessageForm(FlaskForm):
 class Act(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     dt = db.Column(db.DateTime(20))
-    req = db.Column(db.String(200))
+    olt = db.Column(db.String(20))
+    tfc = db.Column(db.String(10))
     sn = db.Column(db.String(20))
     vln = db.Column(db.Numeric(5))
     ctr = db.Column(db.Numeric(10))

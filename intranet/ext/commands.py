@@ -1,6 +1,5 @@
 from intranet.ext.database import db
 from intranet.models import Vln, Act
-from datetime import datetime
 
 
 def createdb():
@@ -14,18 +13,23 @@ def dropdb():
 def insertdb():
     """Insert to database"""
     db.session.bulk_save_objects([
-        Vln(olt='',tfc='',vln='')
+        Vln(olt='',tfc='',vln=''),
     ])
     db.session.commit()
 
 def updatedb():
     """Update to database"""
     db.session.bulk_update_mappings(Act, [
-        {'id':'557'}, # 739 10132
+        {'id':'832','sn':'48575443CB5FA29F'}, # 737 738 741 763
     ])
+    db.session.commit()
+
+def deletedb():
+    db.session.delete(
+        Act.query.filter_by(id=833).first())
     db.session.commit()
 
 def init_app(app):
     # add multiple commands in a bulk
-    for command in [createdb, dropdb, insertdb, updatedb]:
+    for command in [createdb, dropdb, insertdb, updatedb, deletedb]:
         app.cli.add_command(app.cli.command()(command))

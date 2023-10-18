@@ -57,8 +57,9 @@
 					<tr>
 						<td>{{ msg.id }}</td>
 						<td>{{ msg.dt }}</td>
-						<td>{{ msg.req }}</td>
-						<td>!ativa_onu_vlan</td>
+						<td>{{ msg.olt }}</td>
+						<td>{{ msg.tfc }}</td>
+						<td>!ativa_onu_vlan {{ msg.sn }} {{ "%0.0f" | format(msg.vln)}} {{ "%0.0f" | format(msg.ctr)}} {{ msg.cto }}</td>
 						<td>{{ msg.sn }}</td>
 						<td>{{ "%0.0f" | format(msg.vln)}}</td>
 						<td>{{ "%0.0f" | format(msg.ctr)}}</td>
