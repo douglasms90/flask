@@ -53,17 +53,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for msg in historic %}
+				{% for msg in rows %}
 					<tr>
 						<td>{{ msg.id }}</td>
-						<td>{{ msg.dt }}</td>
-						<td>{{ msg.olt }}</td>
-						<td>{{ msg.tfc }}</td>
-						<td>!ativa_onu_vlan {{ msg.sn }} {{ "%0.0f" | format(msg.vln)}} {{ "%0.0f" | format(msg.ctr)}} {{ msg.cto }}</td>
-						<td>{{ msg.sn }}</td>
-						<td>{{ "%0.0f" | format(msg.vln)}}</td>
-						<td>{{ "%0.0f" | format(msg.ctr)}}</td>
-						<td>{{ msg.cto }}</td>
+						<td>{{ msg.nm }}</td>
+						<td>{{ msg.pm }}</td>
+						<td>{{ "%0.0f" | format(msg.qt)}}</td>
+						<td>{{ msg.rc }}</td>
+						<td>{{ msg.pa }}</td>
 					</tr>
 				{% endfor %}
 			</tbody>
