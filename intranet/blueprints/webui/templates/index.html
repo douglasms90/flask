@@ -3,75 +3,48 @@
 
 {% block content %}
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 	<head>
-		<style>
-			.chat-container {
-				position: fixed;
-				bottom: 0;
-				left: 0;
-				width: 100%;
-				padding: 10px;
-				background-color: #f2f2f2;
-			}
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>Página Personalizada</title>
+			<style>
+					@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 
-			.chat-form {
-				display: flex;
-				align-items: center;
-				margin-top: 10px;
-			}
-
-			.chat-form input[type="text"] {
-				flex-grow: 1;
-				padding: 5px;
-				border: none;
-				border-radius: 4px;
-			}
-
-			.chat-form input[type="submit"] {
-				margin-left: 10px;
-				padding: 5px 10px;
-				background-color: #4CAF50;
-				color: #fff;
-				border: none;
-				border-radius: 4px;
-				cursor: pointer;
-			}
-
-			.chat-form input[type="submit"].gray {
-				background-color: #ccc;
-			}
-		</style>
+					body {
+							background-color: black;
+							color: pink;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							height: 100vh;
+							margin: 0;
+							font-family: 'Indie Flower', cursive;
+							text-align: center;
+					}
+					.button {
+							background-color: pink;
+							color: black;
+							border: none;
+							padding: 15px 32px;
+							text-align: center;
+							text-decoration: none;
+							display: inline-block;
+							font-size: 24px;
+							margin: 4px 2px;
+							cursor: pointer;
+							font-family: 'Indie Flower', cursive;
+					}
+			</style>
 	</head>
 	<body>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-				{% for t in tittl %}
-					<th scope="col">{{ t }}</th>
-				{% endfor %}
-				</tr>
-			</thead>
-			<tbody>
-				{% for msg in rows %}
-					<tr>
-						<td>{{ msg.id }}</td>
-						<td>{{ msg.nm }}</td>
-						<td>{{ msg.pm }}</td>
-						<td>{{ "%0.0f" | format(msg.qt)}}</td>
-						<td>{{ msg.rc }}</td>
-						<td>{{ msg.pa }}</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		<div class="chat-container">
-			<form method="POST" class="chat-form" novalidate>
-				{{ form.csrf_token }}
-				{{ form.msg(class='input-field', placeholder='Digite sua mensagem aqui') }}
-				{{ form.submit(class='submit-button gray', value='Send') }}
-			</form>
-		</div>
+			<div>
+					<h1>Daiana Pereira</h1>
+					<h2>Manicure e Pedicure</h2>
+					<h2>(24) 99298-9288</h2>
+					<h3>@daianapereiranails</h3>
+					<button class="button">Agendar</button>
+			</div>
 	</body>
 </html>
 {% endblock %}

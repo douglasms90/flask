@@ -10,6 +10,5 @@ EXTENSIONS = [
     "intranet.ext.commands:init_app",
     "intranet.blueprints.webui:init_app",
 ]
-
 [production]
 SQLALCHEMY_DATABASE_URI = 'postgres:///...'

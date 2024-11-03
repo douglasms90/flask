@@ -1,5 +1,4 @@
 from intranet.ext.database import db
-from intranet.models import Atv
 
 
 def createdb():
