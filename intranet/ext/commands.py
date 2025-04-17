@@ -1,6 +1,5 @@
 from intranet.ext.database import db
 
-
 def createdb():
     """Create database"""
     db.create_all()

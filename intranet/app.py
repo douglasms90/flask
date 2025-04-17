@@ -1,7 +1,6 @@
 from flask import Flask
 from intranet.ext import configuration
 
-
 def minimal_app(**config):
     app = Flask(__name__)
     configuration.init_app(app, **config)
