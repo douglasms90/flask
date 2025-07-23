@@ -6,5 +6,5 @@ from wtforms.validators import DataRequired
 
 
 class MessageForm(FlaskForm):
-    msg = StringField('Message', validators=[DataRequired()])
+    msg = StringField('formatted_hour', validators=[DataRequired()])
     submit = SubmitField('Send')
