@@ -1,52 +1,50 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}This is an example page{% endblock %}
+{% block title %}Horários disponíveis{% endblock %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="pt">
-	<head>
-			<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>Página Personalizada</title>
-			<style>
-					@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffe6f0;
+      padding: 20px;
+    }
+    h1 {
+      color: #d63384;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .time-slot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      border: 2px solid #f3a8cc;
+      border-radius: 8px;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .booked {
+      background-color: #ffe0f0;
+      color: #999;
+      text-decoration: line-through;
+      cursor: not-allowed;
+    }
+    .time-slot:hover:not(.booked) {
+      background-color: #ffb8d4;
+    }
+  </style>
 
-					body {
-							background-color: black;
-							color: pink;
-							display: flex;
-							justify-content: center;
-							align-items: center;
-							height: 100vh;
-							margin: 0;
-							font-family: 'Indie Flower', cursive;
-							text-align: center;
-					}
-					.button {
-							background-color: pink;
-							color: black;
-							border: none;
-							padding: 15px 32px;
-							text-align: center;
-							text-decoration: none;
-							display: inline-block;
-							font-size: 24px;
-							margin: 4px 2px;
-							cursor: pointer;
-							font-family: 'Indie Flower', cursive;
-					}
-			</style>
-	</head>
-	<body>
-			<div>
-					<h1>Daiana Pereira</h1>
-					<h2>Manicure e Pedicure</h2>
-					<h2>(24) 99298-9288</h2>
-					<h3>@daianapereiranails</h3>
-					<button class="button">Agendar</button>
-			</div>
-	</body>
-</html>
+  <h1>Horários disponíveis 💅</h1>
+
+  <div id="schedule">
+    {% for hour in range(8, 19) %}
+      {% set formatted_hour = "{:02d}:00".format(hour) %}
+      <div class="time-slot {% if formatted_hour in booked_hours %}booked{% endif %}">
+        {{ formatted_hour}}
+        {% if formatted_hour in booked_hours %} ❌ {% endif %}
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}
-
 

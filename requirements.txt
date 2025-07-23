@@ -1,5 +1,6 @@
 psycopg2-binary
 python-decouple
 flask_bootstrap
+python-dotenv
 flask_wtf
 dynaconf
