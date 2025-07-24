@@ -38,13 +38,19 @@
   <h1>Horários disponíveis 💅</h1>
 
   <div id="schedule">
-    {% for hour in date %}
+    {% for hour in range(8, 20) %}
       {% set formatted_hour = "{:02d}:00".format(hour) %}
-      <div class="time-slot {% if formatted_hour in booked_hours %}booked{% endif %}">
-        {{ formatted_hour }}
-        {% if formatted_hour in booked_hours %} 💅 {% endif %}
-      </div>
+      {% if formatted_hour in booked_hours %}
+        <div class="time-slot booked">
+          {{ formatted_hour}} 💅
+        </div>
+      {% else %}
+        <a href="{{ url_for('webui.hourview', hour=formatted_hour)}}" style="text-decoration: none;">
+          <div class="time-slot">
+            {{ formatted_hour}}
+          </div>
+        </a>
+      {% endif %}
     {% endfor %}
   </div>
 {% endblock %}
-
