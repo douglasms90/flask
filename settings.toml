@@ -1,7 +1,17 @@
 [default]
+SQLALCHEMY_DATABASE_URI = "postgresql://postgres:41234@localhost:5432/flask_test"
+SQLALCHEMY_TRACK_MODIFICATIONS = "False"
+TITLE = "Intranet"
+SECRET_KEY = "um-nome-bem-seguro"
+EXTENSIONS = [
+    "intranet.ext.appearance:init_app",
+    "intranet.ext.database:init_app",
+    "intranet.ext.commands:init_app",
+    "intranet.blueprints.webui:init_app",
+]
 
 [development]
-SQLALCHEMY_DATABASE_URI = "postgresql://usuario:senha@localhost:5432/database"
+SQLALCHEMY_DATABASE_URI = "postgresql://postgres:41234@localhost:5432/flask_test"
 SQLALCHEMY_TRACK_MODIFICATIONS = "False"
 TITLE = "Intranet"
 SECRET_KEY = "um-nome-bem-seguro"
@@ -13,3 +23,13 @@ EXTENSIONS = [
 ]
 
 [production]
+SQLALCHEMY_DATABASE_URI = "postgresql://postgres:41234@localhost:5432/flask_test"
+SQLALCHEMY_TRACK_MODIFICATIONS = "False"
+TITLE = "Intranet"
+SECRET_KEY = "um-nome-bem-seguro"
+EXTENSIONS = [
+    "intranet.ext.appearance:init_app",
+    "intranet.ext.database:init_app",
+    "intranet.ext.commands:init_app",
+    "intranet.blueprints.webui:init_app",
+]

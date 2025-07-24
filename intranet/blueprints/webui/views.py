@@ -1,5 +1,5 @@
-from flask import render_template, redirect, url_for
-from intranet.models import MessageForm
+from flask import render_template
+
 
 def index():
     booked_hours = ["11:00", "12:00", "13:00"]  # exemplo vindo do servidor
