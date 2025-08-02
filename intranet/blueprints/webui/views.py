@@ -1,9 +1,13 @@
-from flask import render_template
+from flask import abort, render_template
+from intranet.models import Product
 
 
 def index():
-    booked_hours = ["11:00", "12:00", "13:00"]  # exemplo vindo do servidor
-    return render_template('index.html', booked_hours=booked_hours)
+    products = Product.query.all()
+    return render_template("index.html", products=products)
 
-def hour(hour):
-    return render_template('hour.html', formatted_hour=hour)
+def product(product_id):
+    product = Product.query.filter_by(id=product_id).first() or abort(
+        404, "produto nao encontrado"
+    )
+    return render_template("product.html", product=product)

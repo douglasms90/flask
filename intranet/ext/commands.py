@@ -1,7 +1,7 @@
 import click
 from intranet.ext.database import db
 from intranet.ext.auth import create_user
-from intranet.models import Booking
+from intranet.models import Product
 
 
 def createdb():
@@ -13,11 +13,17 @@ def dropdb():
     db.drop_all()
 
 def insertdb():
-    """Insert to database"""
-    db.session.bulk_save_objects([
-        Booking(id=1,nm='Douglas'),
-    ])
+    """Insert db with sample data"""
+    data = [
+        Product(
+            id=1, name="Ciabatta", price="10", description="Italian Bread"
+        ),
+        Product(id=2, name="Baguete", price="15", description="French Bread"),
+        Product(id=3, name="Pretzel", price="20", description="German Bread"),
+    ]
+    db.session.bulk_save_objects(data)
     db.session.commit()
+    return Product.query.all()
 
 def updatedb():
     """Update to database"""

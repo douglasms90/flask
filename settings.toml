@@ -1,5 +1,5 @@
 [default]
-SQLALCHEMY_DATABASE_URI = "postgresql://postgres:41234@localhost:5432/flask_test"
+SQLALCHEMY_DATABASE_URI = "postgresql://postgres:41234@localhost:5432/product"
 SQLALCHEMY_TRACK_MODIFICATIONS = "False"
 TITLE = "Intranet"
 SECRET_KEY = "um-nome-bem-seguro"
@@ -11,7 +11,7 @@ EXTENSIONS = [
 ]
 
 [development]
-SQLALCHEMY_DATABASE_URI = "postgresql://postgres:41234@localhost:5432/flask_test"
+SQLALCHEMY_DATABASE_URI = "postgresql://postgres:41234@localhost:5432/product"
 SQLALCHEMY_TRACK_MODIFICATIONS = "False"
 TITLE = "Intranet"
 SECRET_KEY = "um-nome-bem-seguro"
@@ -23,7 +23,7 @@ EXTENSIONS = [
 ]
 
 [production]
-SQLALCHEMY_DATABASE_URI = "postgresql://postgres:41234@localhost:5432/flask_test"
+SQLALCHEMY_DATABASE_URI = "postgresql://postgres:41234@localhost:5432/product"
 SQLALCHEMY_TRACK_MODIFICATIONS = "False"
 TITLE = "Intranet"
 SECRET_KEY = "um-nome-bem-seguro"
