@@ -11,14 +11,8 @@ class MessageForm(FlaskForm):
 
 class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nm = db.Column(db.String(100), nullable=False)
     dt = db.Column(db.DateTime, nullable=False)
-
-class Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(140))
-    price = db.Column(db.Numeric())
-    description = db.Column(db.Text)
+    nm = db.Column(db.String(100), nullable=True)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)

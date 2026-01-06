@@ -1,13 +1,11 @@
 from flask import abort, render_template
-from intranet.models import Product
+from intranet.models import Booking
 
 
 def index():
-    products = Product.query.all()
-    return render_template("index.html", products=products)
+    bookings = Booking.query.all()
+    return render_template("index.html", bookings=bookings)
 
-def product(product_id):
-    product = Product.query.filter_by(id=product_id).first() or abort(
-        404, "produto nao encontrado"
-    )
-    return render_template("product.html", product=product)
+def booking(booking_id):
+    booking = Booking.query.filter_by(id=booking_id).first() or abort(404, "horário nao encontrado")
+    return render_template("booking.html", booking=booking)

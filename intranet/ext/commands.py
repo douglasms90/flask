@@ -1,7 +1,8 @@
 import click
 from intranet.ext.database import db
 from intranet.ext.auth import create_user
-from intranet.models import Product
+from intranet.models import Booking
+from datetime import datetime
 
 
 def createdb():
@@ -15,20 +16,18 @@ def dropdb():
 def insertdb():
     """Insert db with sample data"""
     data = [
-        Product(
-            id=1, name="Ciabatta", price="10", description="Italian Bread"
-        ),
-        Product(id=2, name="Baguete", price="15", description="French Bread"),
-        Product(id=3, name="Pretzel", price="20", description="German Bread"),
+        Booking(id=1, dt=datetime(2026, 1, 1, 8, 0)),
+        Booking(id=2, dt=datetime(2026, 1, 1, 12, 0)),
+        Booking(id=3, dt=datetime(2026, 1, 1, 18, 0)),
     ]
     db.session.bulk_save_objects(data)
     db.session.commit()
-    return Product.query.all()
+    return Booking.query.all()
 
 def updatedb():
     """Update to database"""
     db.session.bulk_update_mappings(Booking, [
-        {'id':'2','sn':'48575443CB5FA29F'}, # 737 738 741 763
+        {'id':'','nm':''},
     ])
     db.session.commit()
 
