@@ -16,9 +16,7 @@ def dropdb():
 def insertdb():
     """Insert db with sample data"""
     data = [
-        Booking(id=1, dt=datetime(2026, 1, 1, 8, 0)),
-        Booking(id=2, dt=datetime(2026, 1, 1, 12, 0)),
-        Booking(id=3, dt=datetime(2026, 1, 1, 18, 0)),
+        Booking(id=1, dt=datetime(2026, 1, 2, 8, 0)),
     ]
     db.session.bulk_save_objects(data)
     db.session.commit()
@@ -27,7 +25,8 @@ def insertdb():
 def updatedb():
     """Update to database"""
     db.session.bulk_update_mappings(Booking, [
-        {'id':'','nm':''},
+        {'id':'2','nm':'Marilza'},
+        {'id':'3','nm':'Daiana'},
     ])
     db.session.commit()
 

@@ -1,11 +1,11 @@
 {% extends "index.html" %}
 {% block content %}
   <div class="container">
-  <h1>{{ booking.dt.strftime("%d/%m/%Y") }}</h1>
+  <h1>{{ booking.dt.strftime("%d/%m") }}</h1>
 
-  <div class="jumbotron">
-  <h2>Nome: {{booking.nm}}</h2>
-  <p>Horário: {{ booking.dt.strftime("%H:%M") }}</p>
-  </div>
+    <div class="jumbotron">
+      <h2>Nome: {{booking.nm}}</h2>
+      <p>Horário: {{ booking.dt.strftime("%H:%M") }}</p>
+    </div>
   </div>
 {% endblock %}
