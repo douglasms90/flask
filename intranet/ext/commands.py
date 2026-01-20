@@ -25,6 +25,7 @@ def insertdb():
 def updatedb():
     """Update to database"""
     db.session.bulk_update_mappings(Booking, [
+        {'id':'1','nm':'Douglas'},
         {'id':'2','nm':'Marilza'},
         {'id':'3','nm':'Daiana'},
     ])

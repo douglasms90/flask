@@ -8,7 +8,6 @@ def index():
     for booking in bookings:
         day = booking.dt.date()  # extrai apenas a data
         grouped_bookings[day].append(booking)
-    print(grouped_bookings)
     return render_template("index.html", grouped_bookings=grouped_bookings)
 
 def booking(booking_id):
