@@ -3,7 +3,7 @@
 [development]
 SQLALCHEMY_DATABASE_URI = "postgresql://postgres:41234@127.0.0.1:5432/booking"
 SQLALCHEMY_TRACK_MODIFICATIONS = "False"
-TITLE = "Agenda"
+TITLE = "Intranet"
 SECRET_KEY = "um-nome-bem-seguro"
 EXTENSIONS = [
     "intranet.ext.appearance:init_app",

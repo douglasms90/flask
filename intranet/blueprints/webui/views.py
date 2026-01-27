@@ -1,5 +1,6 @@
 from flask import abort, render_template, request
-from intranet.models import Booking, Assets
+from intranet.models import Booking, Assets, SyncForm
+from intranet.ext.webscraping import bs
 from collections import defaultdict
 
 def index():
@@ -15,9 +16,34 @@ def booking(booking_id):
     return render_template("booking.html", booking=booking)
 
 def assets():
+    msg = None
+    form = SyncForm()
     assets = Assets.query.order_by(Assets.id).all()
-    if request.method == "post"
-        def func():
-            print("Deu certo")
-    return render_template("assets.html", assets=assets)
-
+    if form.validate_on_submit():
+        for i in assets:
+            if i.cl == 'rf':
+                pass
+            elif i.cl == 'dollar':
+                pass
+            elif i.cl == 'rf/eua':
+                pass
+            else:
+                st = bs(f"https://statusinvest.com.br/{i.cl}/{i.nm}")
+                print(st)
+                pr = float((st.find_all('strong', class_='value')[0].text).replace('.', '').replace(',', '.'))
+                Assets.query.filter_by(id=i.id).update({"pr":pr})
+                if i[1] == 'fundos-imobiliarios':
+                    dv = float((st.find_all('span', class_='sub-value')[3].text)[3:].replace(',', '.'))
+                    try:
+                        vp = float(st.find_all('strong', class_='value')[6].text.replace(',', '.'))
+                    except:
+                        vp = 0
+                    Assets.query.filter_by(id=i.id).update({"dv":dv,"vp":vp})
+                if i[1] == 'acoes':
+                    dv = float((st.find_all('span', class_='sub-value')[3].text)[3:].replace(',', '.'))
+                    pl = float(st.find_all('strong', class_='value d-block lh-4 fs-4 fw-700')[1].text.replace(',', '.'))
+                    vp = float(st.find_all('strong', class_='value d-block lh-4 fs-4 fw-700')[3].text.replace(',', '.'))
+                    Assets.query.filter_by(id=i.id).update({"dv":dv,"pl":pl, "vp":vp})
+            print("ponto")
+        db.session.commit()
+    return render_template("assets.html", assets=assets, form=form)

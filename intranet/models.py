@@ -29,3 +29,6 @@ class Assets(db.Model):
     dv = db.Column(db.Float)
     pl = db.Column(db.Float)
     vp = db.Column(db.Float)
+
+class SyncForm(FlaskForm):
+    sync = SubmitField("Sync")

@@ -2,17 +2,18 @@
 {% block title %}{{config.get('TITLE')}}{% endblock %}
 
 {% block navbar %}
-<div class="navbar navbar-fixed-top">
-  <!-- ... -->
-</div>
+  <div class="navbar navbar-fixed-top">
+    <!-- ... -->
+  </div>
 {% endblock %}
 
 {% block content %}
   <div class="container">
   <h1>{{config.get('TITLE')}}</h1>
 
-    <form action="{{ url_for('webui.func') }}" method="post">
-      <button class="btn btn-secondary rounded-pill px-3" type="button">Sync</button>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+      {{ form.sync(class="btn btn-primary rounded-pill px-3") }}
     </form>
 
     <div class="jumbotron">
@@ -20,14 +21,14 @@
         {% for asset in assets %}
           <li class="list-group-item">
             <a>
-              {{ asset.id }} | 
-              {{ asset.cl }} | 
-              {{ asset.nm }} | 
-              {{ "%0.2f"|format( asset.pr )}} | 
-              {{ "%0.2f"|format( asset.pm )}} | 
-              {{ "%0.2f"|format( asset.qt )}} | 
-              {{ "%0.2f"|format(asset.dv|default(0, true)) }} | 
-              {{ "%0.2f"|format(asset.pl|default(0, true)) }} | 
+              {{ asset.id }} 
+              {{ asset.cl }} 
+              {{ asset.nm }} 
+              {{ "%0.2f"|format( asset.pr )}} 
+              {{ "%0.2f"|format( asset.pm )}} 
+              {{ "%0.2f"|format( asset.qt )}} 
+              {{ "%0.2f"|format(asset.dv|default(0, true)) }} 
+              {{ "%0.2f"|format(asset.pl|default(0, true)) }} 
               {{ "%0.2f"|format(asset.vp|default(0, true)) }}
             </a>
           </li>
