@@ -1,5 +1,5 @@
 from flask import abort, render_template
-from intranet.models import Booking
+from intranet.models import Booking, Assets
 from collections import defaultdict
 
 def index():
@@ -14,4 +14,6 @@ def booking(booking_id):
     booking = Booking.query.filter_by(id=booking_id).first() or abort(404, "horário nao encontrado")
     return render_template("booking.html", booking=booking)
 
-
+def assets():
+    assets = Assets.query.order_by(Assets.id).all()
+    return render_template("assets.html", assets=assets)

@@ -18,3 +18,14 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(140))
     password = db.Column(db.String(512))
+
+class Assets(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    cl = db.Column(db.String(20))
+    nm = db.Column(db.String(20))
+    pr = db.Column(db.Float)
+    pm = db.Column(db.Float)
+    qt = db.Column(db.Float)
+    dv = db.Column(db.Float)
+    pl = db.Column(db.Float)
+    vp = db.Column(db.Float)

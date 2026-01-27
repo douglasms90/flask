@@ -25,5 +25,5 @@ def init_app(app):
     admin.name = app.config.TITLE
     admin.template_mode = "bootstrap3"
     admin.init_app(app)
-    admin.add_view(sqla.ModelView(Product, db.session))
+    admin.add_view(sqla.ModelView(Booking, db.session))
     admin.add_view(UserAdmin(User, db.session))
