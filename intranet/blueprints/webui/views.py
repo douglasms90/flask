@@ -1,4 +1,4 @@
-from flask import abort, render_template
+from flask import abort, render_template, request
 from intranet.models import Booking, Assets
 from collections import defaultdict
 
@@ -16,4 +16,8 @@ def booking(booking_id):
 
 def assets():
     assets = Assets.query.order_by(Assets.id).all()
+    if request.method == "post"
+        def func():
+            print("Deu certo")
     return render_template("assets.html", assets=assets)
+
