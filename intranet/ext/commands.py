@@ -16,7 +16,7 @@ def dropdb():
 def insertdb():
     """Insert db with sample data"""
     data = [
-        Assets(id=101, cl="tesouro", nm="cxtrb", pr=101.5797, pm=98.4251, qt=100, dv=None, pl=None, vp=None),
+        Assets(id=101, cl="rf", nm="cxtrb", pr=101.5797, pm=98.4251, qt=100, dv=None, pl=None, vp=None),
         Assets(id=102, cl="tesouro", nm="tesouro-selic-2031", pr=18136.1 , pm=15916.69 , qt=1, dv=None, pl=None, vp=None),
         Assets(id=103, cl="rf", nm="LCI-26", pr=1119.243, pm=1000, qt=20, dv=None, pl=None, vp=None),
         Assets(id=104, cl="tesouro", nm="tesouro-ipca-2026", pr= 4341.74, pm=3146.8101, qt= 0.79, dv=None, pl=None),
