@@ -20,7 +20,7 @@ def assets():
     msg = None
     form = SyncForm()
     assets = Assets.query.order_by(Assets.id).all()
-    titles = ['ID', 'CL', 'NM', 'PR', 'PM', 'QT', 'DV', 'PL', 'VP']
+    titles = ['ID', 'CL', 'NM', 'V%', 'PR', 'PM', 'QT', 'D%', 'Y%', 'PL', 'VP', 'PS', 'VA', 'RS']
     if form.validate_on_submit():
         for i in assets:
             print(i.cl)
@@ -47,5 +47,24 @@ def assets():
                     vp = float(st.find_all('strong', class_='value d-block lh-4 fs-4 fw-700')[3].text.replace(',', '.'))
                     Assets.query.filter_by(id=i.id).update({"dv":dv,"pl":pl, "vp":vp})
         db.session.commit()
-        return render_template("assets.html", assets=assets, form=form)
-    return render_template("assets.html", titles = titles, assets=assets, form=form)
+        return render_template("assets.html", data=data, form=form)
+    data = list()
+    for asset in assets:
+        data.append({
+            "id":asset.id,
+            "cl":asset.cl,
+            "nm":asset.nm,
+            "v%":((asset.pr-asset.pm)/asset.pr)*100,
+            "pr":asset.pr,
+            "pm":asset.pm,
+            "qt":asset.qt,
+            "d%":(asset.dv/asset.pr)*100 if asset.dv is not None and asset.pr else None,
+            "y%":(asset.dv/asset.pm)*100 if asset.dv is not None and asset.pm else None,
+            "pl":asset.pl,
+            "vp":asset.vp,
+            "ps":asset.pr*asset.qt,
+            "va":asset.pm*asset.qt,
+            "rs":(asset.pm*asset.qt)*(asset.pr*asset.qt)
+        })
+    print(data)
+    return render_template("assets.html", data=data, form=form)
