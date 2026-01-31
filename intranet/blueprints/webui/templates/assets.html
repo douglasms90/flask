@@ -10,30 +10,25 @@
 
 {% block content %}
   <table class="table table-striped">
-    <thead>
-      <tr>
-        {% for key in data[0].keys() %}
-          <th>{{ key }}</th>
-        {% endfor %}
-      </tr>
-    </thead>
     <tbody>
       {% for col in data %}
         <tr>
           <td>{{ col["id"] }}</td>
           <td>{{ col["cl"] }}</td>
           <td>{{ col["nm"] }}</td>
-          <td>{{ "%0.2f"|format(col["v%"]) }}%</td>
-          <td>{{ "%0.2f"|format(col["pr"]) }}</td>
-          <td>{{ "%0.2f"|format(col["pm"]) }}</td>
-          <td>{{ "%0.2f"|format(col["qt"]) }}</td>
-          <td>{{ "%0.2f"|format(col["d%"]|default(0, true)) }}%</td>
-          <td>{{ "%0.2f"|format(col["y%"]|default(0, true)) }}%</td>
-          <td>{{ col["pl"]|default("", true) }}</td>
-          <td>{{ col["vp"]|default("", true) }}</td>
-          <td>{{ "%0.2f"|format(col["ps"]) }}</td>
-          <td>{{ "%0.2f"|format(col["va"]) }}</td>
-          <td>{{ "%0.2f"|format(col["rs"]) }}</td>
+          <td>{{ col["v%"] }}</td>
+          <td>{{ col["pr"] }}</td>
+          <td>{{ col["pm"] }}</td>
+          <td>{{ col["qt"] }}</td>
+          <td>{{ col["d%"] }}</td>
+          <td>{{ col["y%"] }}</td>
+          <td>{{ col["pl"] }}</td>
+          <td>{{ col["vp"] }}</td>
+          <td>{{ col["ps"] }}</td>
+          <td>{{ col["va"] }}</td>
+          <td>{{ col["rs"] }}</td>
+          <td>{{ col["tt"] }}</td>
+          <td>{{ col["ta"] }}</td>
         </tr>
       {% endfor %}
     </tbody>

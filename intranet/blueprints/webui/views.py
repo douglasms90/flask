@@ -1,4 +1,4 @@
-from flask import abort, render_template, request
+from flask import abort, render_template, request, redirect, url_for
 from intranet.models import Booking, Assets, SyncForm
 from intranet.ext.webscraping import bs
 from intranet.ext.database import db
@@ -20,7 +20,6 @@ def assets():
     msg = None
     form = SyncForm()
     assets = Assets.query.order_by(Assets.id).all()
-    titles = ['ID', 'CL', 'NM', 'V%', 'PR', 'PM', 'QT', 'D%', 'Y%', 'PL', 'VP', 'PS', 'VA', 'RS']
     if form.validate_on_submit():
         for i in assets:
             print(i.cl)
@@ -47,24 +46,29 @@ def assets():
                     vp = float(st.find_all('strong', class_='value d-block lh-4 fs-4 fw-700')[3].text.replace(',', '.'))
                     Assets.query.filter_by(id=i.id).update({"dv":dv,"pl":pl, "vp":vp})
         db.session.commit()
-        return render_template("assets.html", data=data, form=form)
+        return redirect(url_for("webui.assets"))
     data = list()
+    tt = ta = 0
+    dols = 5.2
     for asset in assets:
+        ta += asset.pr*asset.qt if asset.id is not 4 else (asset.pr*asset.qt)*dols
+        tt += asset.pm*asset.qt if asset.id is not 4 else (asset.pr*asset.qt)*dols
         data.append({
-            "id":asset.id,
-            "cl":asset.cl,
-            "nm":asset.nm,
-            "v%":((asset.pr-asset.pm)/asset.pr)*100,
-            "pr":asset.pr,
-            "pm":asset.pm,
-            "qt":asset.qt,
-            "d%":(asset.dv/asset.pr)*100 if asset.dv is not None and asset.pr else None,
-            "y%":(asset.dv/asset.pm)*100 if asset.dv is not None and asset.pm else None,
-            "pl":asset.pl,
-            "vp":asset.vp,
-            "ps":asset.pr*asset.qt,
-            "va":asset.pm*asset.qt,
-            "rs":(asset.pm*asset.qt)*(asset.pr*asset.qt)
+            "id":f"{asset.id}",
+            "cl":f"{asset.cl}",
+            "nm":f"{asset.nm.upper()}",
+            "v%":f"{'%.2f' %(((asset.pr-asset.pm)/asset.pr)*100)}%",
+            "pr":f"{'%.2f' %(asset.pr)}",
+            "pm":f"{'%.2f' %(asset.pm)}",
+            "qt":f"{asset.qt}",
+            "d%":f"{'%.2f'%((asset.dv/asset.pr)*100) if asset.dv is not None else 0}%",
+            "y%":f"{'%.2f'%((asset.dv/asset.pm)*100) if asset.dv is not None else 0}%",
+            "pl":f"{asset.pl if asset.pl is not None else ""}",
+            "vp":f"{asset.vp if asset.vp is not None else ""}",
+            "ps":f"{'%.2f' %(asset.pr*asset.qt)}",
+            "va":f"{'%.2f' %(asset.pm*asset.qt)}",
+            "rs":f"{'%.2f' %((asset.pr*asset.qt)-(asset.pm*asset.qt))}",
+            "tt":f"{'%.2f' %(tt)}",
+            "ta":f"{'%.2f' %(ta)}"
         })
-    print(data)
     return render_template("assets.html", data=data, form=form)
