@@ -5,8 +5,8 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
 
-class MessageForm(FlaskForm):
-    msg = StringField('formatted_hour', validators=[DataRequired()])
+class CommandForm(FlaskForm):
+    msg = StringField('msg')
     submit = SubmitField('Send')
 
 class Booking(db.Model):
@@ -29,6 +29,3 @@ class Assets(db.Model):
     dv = db.Column(db.Float)
     pl = db.Column(db.Float)
     vp = db.Column(db.Float)
-
-class SyncForm(FlaskForm):
-    sync = SubmitField("Sync")

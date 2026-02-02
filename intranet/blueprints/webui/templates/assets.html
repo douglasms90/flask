@@ -1,14 +1,8 @@
 {% extends "bootstrap/base.html" %}
 {% block title %}{{config.get('TITLE')}}{% endblock %}
 
-
-{% block navbar %}
-  <div class="navbar navbar-fixed-top">
-    <!-- ... -->
-  </div>
-{% endblock %}
-
 {% block content %}
+  {{ super() }}
   <table class="table table-striped">
     <tbody>
       {% for col in data %}
@@ -36,6 +30,7 @@
 
   <form method="POST">
     {{ form.hidden_tag() }}
-    {{ form.sync(class="btn btn-primary rounded-pill px-3") }}
+    {{ form.msg(placeholder="Enviar") }}
   </form>
 {% endblock %}
+
