@@ -21,7 +21,8 @@ def assets():
     form = CommandForm()
     assets = Assets.query.order_by(Assets.id).all()
     if form.validate_on_submit():
-        if form.msg.data == "sync":
+        split = form.msg.data.split()
+        if split[0] == "sync":
             for i in assets:
                 print(i.cl)
                 if i.cl == 'rf':
@@ -49,6 +50,17 @@ def assets():
             db.session.commit()
             return redirect(url_for("webui.assets"))
 
+        if split[0] == "update":
+            print(split)
+            Assets.query.filter_by(id=split[2]).update({split[3]:split[4].replace(",", ".")})
+            db.session.commit()
+            return redirect(url_for("webui.assets"))
+
+        if split[0] == "delete":
+            db.session.delete(
+                Assets.query.filter_by(id=split[2]).first())
+            db.session.commit()
+            return redirect(url_for("webui.assets"))
         else:
             pass
     data = list()
@@ -61,7 +73,7 @@ def assets():
             "id":f"{asset.id}",
             "cl":f"{asset.cl}",
             "nm":f"{asset.nm.upper()}",
-            "v%":f"{((asset.pr-asset.pm)/asset.pr)*100:.2f}%",
+            "v%":f"{((asset.pr-asset.pm)/asset.pm)*100:.2f}%",
             "pr":f"{asset.pr:.2f}",
             "pm":f"{asset.pm:.2f}",
             "qt":f"{asset.qt}",
