@@ -64,9 +64,15 @@ def assets():
         else:
             pass
     data = list()
-    tt = ta = 0
-    dols = 5.2
+    result = list()
+    rf = fi = ac = ea = bt = tt = ta = 0
+    dols = 5.19
     for asset in assets:
+        rf += asset.pm * asset.qt if str(asset.id).startswith("1") else 0
+        fi += asset.pm * asset.qt if str(asset.id).startswith("2") else 0
+        ac += asset.pm * asset.qt if str(asset.id).startswith("3") else 0
+        ea += asset.pm * asset.qt if str(asset.id).startswith("4") else 0
+        bt += asset.pm * asset.qt if str(asset.id).startswith("402") else 0
         ta += asset.pm * asset.qt if not str(asset.id).startswith("4") else (asset.pm * asset.qt) * dols
         tt += asset.pr * asset.qt if not str(asset.id).startswith("4") else (asset.pr * asset.qt) * dols
         data.append({
@@ -83,8 +89,15 @@ def assets():
             "vp":f"{asset.vp}" if asset.vp is not None else "",
             "ps":f"{(asset.pr*asset.qt if not str(asset.id).startswith("4") else (asset.pr*asset.qt) * dols):.2f}",
             "va":f"{(asset.pm*asset.qt if not str(asset.id).startswith("4") else (asset.pm*asset.qt) * dols):.2f}",
-            "rs":f"{(asset.pr*asset.qt)-(asset.pm*asset.qt):.2f}",
-            "tt":f"{tt:.2f}",
-            "ta":f"{ta:.2f}"
+            "rs":f"{(asset.pr*asset.qt)-(asset.pm*asset.qt) if not str(asset.id).startswith("4") else (((asset.pr*asset.qt)-(asset.pm*asset.qt)) * dols):.2f}",
         })
-    return render_template("assets.html", data=data, form=form)
+    result.append({
+        "rf":f"{rf:.2f}",
+        "fi":f"{fi:.2f}",
+        "ac":f"{ac:.2f}",
+        "ea":f"{ea:.2f}",
+        "bt":f"{bt:.2f}",
+        "tt":f"{tt:.2f}",
+        "ta":f"{ta:.2f}"
+    })
+    return render_template("assets.html", data=data, result = result, form=form)

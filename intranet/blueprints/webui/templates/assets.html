@@ -21,8 +21,6 @@
           <td>{{ col["ps"] }}</td>
           <td>{{ col["va"] }}</td>
           <td>{{ col["rs"] }}</td>
-          <td>{{ col["tt"] }}</td>
-          <td>{{ col["ta"] }}</td>
         </tr>
       {% endfor %}
     </tbody>
@@ -32,5 +30,21 @@
     {{ form.hidden_tag() }}
     {{ form.msg(placeholder="Enviar") }}
   </form>
+
+  <table class="table table-striped">
+    <tbody>
+      {% for col in result %}
+        <tr>
+          <td>{{ col["rf"] }}</td>
+          <td>{{ col["fi"] }}</td>
+          <td>{{ col["ac"] }}</td>
+          <td>{{ col["ea"] }}</td>
+          <td>{{ col["bt"] }}</td>
+          <td>{{ col["tt"] }}</td>
+          <td>{{ col["ta"] }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
 
