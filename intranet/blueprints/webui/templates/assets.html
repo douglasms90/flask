@@ -26,25 +26,26 @@
     </tbody>
   </table>
 
-  <form method="POST">
-    {{ form.hidden_tag() }}
-    {{ form.msg(placeholder="Enviar") }}
-  </form>
-
   <table class="table table-striped">
     <tbody>
       {% for col in result %}
         <tr>
           <td>{{ col["rf"] }}</td>
           <td>{{ col["fi"] }}</td>
+          <td>{{ col["fd"] }}</td>
           <td>{{ col["ac"] }}</td>
+          <td>{{ col["ad"] }}</td>
           <td>{{ col["ea"] }}</td>
           <td>{{ col["bt"] }}</td>
           <td>{{ col["tt"] }}</td>
-          <td>{{ col["ta"] }}</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
+
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.msg(placeholder="Enviar") }}
+  </form>
 {% endblock %}
 

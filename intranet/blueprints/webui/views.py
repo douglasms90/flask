@@ -65,16 +65,21 @@ def assets():
             pass
     data = list()
     result = list()
-    rf = fi = ac = ea = bt = tt = ta = 0
+    rfpr = fipr = fid = acpr = acd = eapr = btpr = ttpr = rfpm = fipm = fiy = acpm = acy = eapm = btpm = ttpm = 0
     dols = 5.19
     for asset in assets:
-        rf += asset.pm * asset.qt if str(asset.id).startswith("1") else 0
-        fi += asset.pm * asset.qt if str(asset.id).startswith("2") else 0
-        ac += asset.pm * asset.qt if str(asset.id).startswith("3") else 0
-        ea += asset.pm * asset.qt if str(asset.id).startswith("4") else 0
-        bt += asset.pm * asset.qt if str(asset.id).startswith("402") else 0
-        ta += asset.pm * asset.qt if not str(asset.id).startswith("4") else (asset.pm * asset.qt) * dols
-        tt += asset.pr * asset.qt if not str(asset.id).startswith("4") else (asset.pr * asset.qt) * dols
+        rfpr += asset.pr * asset.qt if str(asset.id).startswith("1") else 0
+        rfpm += asset.pm * asset.qt if str(asset.id).startswith("1") else 0
+        fipr += asset.pr * asset.qt if str(asset.id).startswith("2") else 0
+        fipm += asset.pm * asset.qt if str(asset.id).startswith("2") else 0
+        acpr += asset.pr * asset.qt if str(asset.id).startswith("3") else 0
+        acpm += asset.pm * asset.qt if str(asset.id).startswith("3") else 0
+        eapr += (asset.pr * asset.qt if str(asset.id).startswith("4") else 0)*dols
+        eapm += (asset.pm * asset.qt if str(asset.id).startswith("4") else 0)*dols
+        btpr += (asset.pr * asset.qt if str(asset.id).startswith("402") else 0)*dols
+        btpm += (asset.pm * asset.qt if str(asset.id).startswith("402") else 0)*dols
+        ttpr += asset.pr * asset.qt if not str(asset.id).startswith("4") else (asset.pr * asset.qt) * dols
+        ttpm += asset.pm * asset.qt if not str(asset.id).startswith("4") else (asset.pm * asset.qt) * dols
         data.append({
             "id":f"{asset.id}",
             "cl":f"{asset.cl}",
@@ -87,17 +92,14 @@ def assets():
             "y%":f"{(asset.dv/asset.pm)*100:.2f}%" if asset.dv is not None else "",
             "pl":f"{asset.pl}" if asset.pl is not None else "",
             "vp":f"{asset.vp}" if asset.vp is not None else "",
-            "ps":f"{(asset.pr*asset.qt if not str(asset.id).startswith("4") else (asset.pr*asset.qt) * dols):.2f}",
-            "va":f"{(asset.pm*asset.qt if not str(asset.id).startswith("4") else (asset.pm*asset.qt) * dols):.2f}",
+            "ps":f"{(asset.pr*asset.qt if not str(asset.id).startswith("4") else (asset.pr * asset.qt) * dols):.2f}",
+            "va":f"{(asset.pm*asset.qt if not str(asset.id).startswith("4") else (asset.pm * asset.qt) * dols):.2f}",
             "rs":f"{(asset.pr*asset.qt)-(asset.pm*asset.qt) if not str(asset.id).startswith("4") else (((asset.pr*asset.qt)-(asset.pm*asset.qt)) * dols):.2f}",
         })
-    result.append({
-        "rf":f"{rf:.2f}",
-        "fi":f"{fi:.2f}",
-        "ac":f"{ac:.2f}",
-        "ea":f"{ea:.2f}",
-        "bt":f"{bt:.2f}",
-        "tt":f"{tt:.2f}",
-        "ta":f"{ta:.2f}"
-    })
-    return render_template("assets.html", data=data, result = result, form=form)
+    result.extend([
+        {"rf":f"{(ttpm*0.5):.2f}","fi":f"{(ttpm*0.20):.2f}","ac":f"{(ttpm*0.15):.2f}","ea":f"{(ttpm*0.10):.2f}","bt":f"{(ttpm*0.05):.2f}","tt":""},
+        {"rf":f"{rfpr:.2f}","fi":f"{fipr:.2f}","fd":f"{fid:.2f}","ac":f"{acpr:.2f}","ad":f"{acd:.2f}","ea":f"{eapr:.2f}","bt":f"{btpr:.2f}","tt":f"{ttpr:.2f}"},
+        {"rf":f"{rfpm:.2f}","fi":f"{fipm:.2f}","fd":f"{fiy:.2f}","ac":f"{acpm:.2f}","ad":f"{acy:.2f}","ea":f"{eapm:.2f}","bt":f"{btpm:.2f}","tt":f"{ttpm:.2f}"},
+        {"rf":f"{rfpr-rfpm:.2f}","fi":f"{fipr-fipm:.2f}","fd":f"","ac":f"{acpr-acpm:.2f}","ad":f"","ea":f"{eapr-eapm:.2f}","bt":f"{btpr-btpm:.2f}","tt":f"{ttpr-ttpm:.2f}"}
+    ])
+    return render_template("assets.html", data = data, result = result, form = form)
